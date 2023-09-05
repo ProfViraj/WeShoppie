@@ -1,5 +1,5 @@
 # WeShoppie
-This is WeShoppie repository
+This is WeShoppie repository...
 The main motive of this project is to connect the customers
 to their trusted local shopkeepers or sellers. This application provides a 
 digital platform to both buyer and seller or any other local service provider. 
