@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light_blue"
+    tools:context=".SelectUserType">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Welcome"
+        android:text="@string/welcome_to"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Weshoppie"
+        android:text="@string/weshoppie"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_below="@+id/Welcome"
+        />
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/selectuser"
+       android:text="@string/please_select_the_user_type"
+       android:layout_below="@+id/Weshoppie"
+       android:layout_marginTop="10dp"
+       android:gravity="center"
+       />
+
+    <FrameLayout
+        android:id="@+id/frame_cust"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/selectuser"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/edit_text_border">
+
+        <ImageView
+            android:id="@+id/image_shopkeeper"
+            android:layout_width="wrap_content"
+            android:layout_height="158dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/customer_sign_in"
+            />
+
+        <Button
+            android:id="@+id/customer_login"
+            android:layout_width="125dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="65dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/continue_as_a_customer"
+            android:textAlignment="center"
+            />
+    </FrameLayout>
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/shop_frame"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/frame_cust"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50sp"
+        android:background="@drawable/edit_text_border">
+
+        <ImageView
+            android:id="@+id/image_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="158dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/shopkeeper_sign_in"
+            />
+
+        <Button
+            android:id="@+id/shopkeeper_login"
+            android:layout_width="125dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="65dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/continue_as_shopkeeper"
+            android:textAlignment="center"
+            />
+
+    </FrameLayout>
+
+
+    <Button
+        android:id="@+id/Logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shop_frame"
+        android:layout_marginTop="30sp"
+        android:layout_marginStart="75sp"
+        android:layout_marginEnd="75sp"
+        android:text="@string/logout"/>
+
+
+
+</RelativeLayout>
+
+

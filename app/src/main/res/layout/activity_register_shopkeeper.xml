@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterShopkeeper"
+    android:background="@color/background_light_blue"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/weshoppie"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:background="@drawable/edit_text_border"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:text="@string/here_s_your_first_step_with_us"
+                android:textSize="40sp"
+                android:layout_margin="15dp"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/shopkeeper_sign_in"
+                android:paddingEnd="15dp"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fill_out_the_details"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="5sp"
+            android:layout_marginBottom="10sp"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/owner_s_name"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/Owner_Name"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/enter_full_name"
+            android:gravity="center"
+            android:inputType="textPersonName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile_number"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/Owner_Phone"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/enter_mobile_number"
+            android:gravity="center"
+            android:inputType="phone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shop_name"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/Shop_Name"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/enter_shop_name"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shop_type"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <Spinner
+            android:id="@+id/Shop_Type"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:spinnerMode="dropdown"
+            android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+            android:background="@drawable/edit_text_border"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shop_address"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/Shop_Address"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/enter_full_address_of_the_shop"
+            android:gravity="center"
+            android:inputType="textMultiLine"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_city"
+                android:layout_marginEnd="40sp"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pincode"
+                android:layout_marginStart="50sp"
+                android:layout_marginEnd="10sp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10sp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/shop_city"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="5sp"
+                android:hint="@string/enter_city"
+                android:gravity="center"
+                />
+
+            <EditText
+                android:id="@+id/pincode"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="5sp"
+                android:hint="@string/enter_pincode"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_state_name"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:hint="@string/enter_state_name"
+            android:background="@drawable/edit_text_border"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/opening_time"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="30sp"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/closing_time"
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="10sp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10sp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Shop_Open_Time"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="10sp"
+                android:hint="@string/opening_time"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/Shop_Close_Time"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="5sp"
+                android:hint="@string/closing_time"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_optional"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/shop_description"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/enter_more_about_your_shop"
+            android:gravity="center"
+            android:inputType="textMultiLine"/>
+
+        <Button
+            android:id="@+id/Shopkeeper_Register"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_margin="10sp"
+            android:text="@string/register_your_shop"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+</ScrollView>

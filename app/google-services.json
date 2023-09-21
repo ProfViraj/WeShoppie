@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472136417580",
+    "project_id": "weshoppie-ac258",
+    "storage_bucket": "weshoppie-ac258.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472136417580:android:8f4cc63bc770e866d92c89",
+        "android_client_info": {
+          "package_name": "com.example.weshoppie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472136417580-r482r3ioad7ie2sr61dgkmfpg4tf28ng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfouGtw3Oi7KP2tJMz7PxZmLTMk-4Sr-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472136417580-r482r3ioad7ie2sr61dgkmfpg4tf28ng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
