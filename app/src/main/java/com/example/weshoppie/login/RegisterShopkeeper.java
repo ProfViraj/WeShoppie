@@ -1,4 +1,4 @@
-package com.example.weshoppie;
+package com.example.weshoppie.login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.weshoppie.ShopkeeperDashboard;
+import com.example.weshoppie.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,25 +52,6 @@ public class RegisterShopkeeper extends AppCompatActivity {
     FirebaseUser CurrentUser = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    //To check if the data is already saved*********************************************************
-    @Override
-    protected void onStart() {
-        super.onStart();
-        userid = CurrentUser.getUid();
-
-        //Reading data from teh DATABASE************************************************************
-        db.collection("Shopkeeper").document(userid).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.getResult().exists()){
-                            startActivity(new Intent(RegisterShopkeeper.this, CustomerDashboard.class));
-                            finish();
-                        }
-                    }
-                });
-        //******************************************************************************************
-    }
     //***********************************************************************************************
 
     @Override
@@ -245,7 +228,7 @@ public class RegisterShopkeeper extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(RegisterShopkeeper.this, "Data Saved", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(RegisterShopkeeper.this, CustomerDashboard.class));
+                                startActivity(new Intent(RegisterShopkeeper.this, ShopkeeperDashboard.class));
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {

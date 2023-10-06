@@ -1,9 +1,8 @@
-package com.example.weshoppie;
+package com.example.weshoppie.login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.weshoppie.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,25 +29,7 @@ public class RegisterCustomer extends AppCompatActivity {
     Button Cust_Register;
     String userid;
     FirebaseUser CurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();;
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        userid = CurrentUser.getUid();
-        db.collection("Customer").document(userid).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.getResult().exists()){
-                            startActivity(new Intent(RegisterCustomer.this, CustomerDashboard.class));
-                            finish();
-                        }
-                    }
-                });
-    }
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +103,8 @@ public class RegisterCustomer extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(RegisterCustomer.this, "Date Saved", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(RegisterCustomer.this, CustomerDashboard.class));
-                                finish();
+                                //startActivity(new Intent(RegisterCustomer.this, ShopkeeperDashboard.class));
+                                //finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

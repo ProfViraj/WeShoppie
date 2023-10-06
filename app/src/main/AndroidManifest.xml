@@ -13,28 +13,31 @@
         android:theme="@style/Theme.WeShoppie"
         tools:targetApi="31">
         <activity
-            android:name=".CustomerDashboard"
+            android:name=".ProductAdd"
             android:exported="false" />
         <activity
-            android:name=".ForgotPassword"
+            android:name=".ShopkeeperDashboard"
             android:exported="false" />
         <activity
-            android:name=".RegisterCustomer"
+            android:name=".login.ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".Registration"
+            android:name=".login.RegisterCustomer"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".login.Registration"
             android:exported="false" />
         <activity
-            android:name=".Logout"
+            android:name=".login.LoginPage"
             android:exported="false" />
         <activity
-            android:name=".RegisterShopkeeper"
+            android:name=".login.Logout"
             android:exported="false" />
         <activity
-            android:name=".SelectUserType"
+            android:name=".login.RegisterShopkeeper"
+            android:exported="false" />
+        <activity
+            android:name=".login.SelectUserType"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

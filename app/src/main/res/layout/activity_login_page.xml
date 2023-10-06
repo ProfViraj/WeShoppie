@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/background_light_blue"
-    tools:context=".LoginPage">
+    tools:context=".login.LoginPage">
 
     <TextView
         android:id="@+id/signin"

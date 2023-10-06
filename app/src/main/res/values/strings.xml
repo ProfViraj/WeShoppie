@@ -55,4 +55,10 @@
     <string name="shop_name">Shop Name:</string>
     <string name="shop_type">Shop Type:</string>
     <string name="shop_address">Shop Address:</string>
+    <string name="add_product">Add Product</string>
+    <string name="enter_the_product_name">Enter the product Name</string>
+    <string name="enter_product_price_rs">Enter Product Price (Rs.)</string>
+    <string name="enter_the_brand_name">Enter the Brand name :</string>
+    <string name="product_company_if_any">Product Company (if any) :</string>
+    <string name="product_price_per">Product Price per :</string>
 </resources>
