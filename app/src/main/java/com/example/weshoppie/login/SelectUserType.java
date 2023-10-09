@@ -25,8 +25,8 @@ public class SelectUserType extends AppCompatActivity {
     Button customer_login;
     Button shopkeeper_login;
     Button logout;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();;
-    FirebaseUser user = mAuth.getCurrentUser();;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -73,7 +73,7 @@ public class SelectUserType extends AppCompatActivity {
                                     startActivity(new Intent(SelectUserType.this, ShopkeeperDashboard.class));
                                 }
                                 else {
-                                    Intent intent = new Intent(SelectUserType.this, RegisterCustomer.class);
+                                    Intent intent = new Intent(SelectUserType.this, RegisterShopkeeper.class);
                                     startActivity(intent);
                                 }
                             }
