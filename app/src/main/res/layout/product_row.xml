@@ -15,26 +15,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:background="@color/white"
             android:id="@+id/llRow"
             android:padding="11sp">
 
             <ImageView
                 android:layout_width="70sp"
                 android:layout_height="70sp"
+                android:padding="5sp"
                 android:id="@+id/imgProduct"
-                android:background="#C6F492"
+                android:background="#FFEFD5"
                 android:contentDescription="Product Image"
                 android:src="@drawable/baseline_shopping_bag_24"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11sp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product Name"
                     android:textSize="22sp"
@@ -47,14 +49,14 @@
 
                     <TextView
                         android:id="@+id/txtPrice"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Price"
                         android:textSize="18sp"/>
 
                     <TextView
                         android:id="@+id/txtPricePer"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Per"
                         android:textSize="18sp"
@@ -62,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/txtBrand"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Company"
                         android:textSize="18sp"
@@ -71,6 +73,13 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/delproduct"
+                android:layout_width="50sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_delete_24" />
 
         </LinearLayout>
 

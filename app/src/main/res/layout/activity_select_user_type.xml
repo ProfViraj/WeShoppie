@@ -40,6 +40,15 @@
        android:gravity="center"
        />
 
+    <TextView
+        android:layout_below="@id/selectuser"
+        android:id="@+id/WelcomeUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:gravity="center"
+        android:textSize="17sp"/>
+
     <FrameLayout
         android:id="@+id/frame_cust"
         android:layout_width="match_parent"

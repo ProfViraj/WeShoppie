@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_light_blue">#bbd3fa</color>
     <color name="button_col">#00C4FD</color>
+    <color name="peach">#F1ABA6</color>
+    <color name="light_pink">#FFEFD5</color>
 </resources>

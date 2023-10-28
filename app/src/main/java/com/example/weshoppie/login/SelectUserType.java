@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
 import com.example.weshoppie.R;
-import com.example.weshoppie.ShopkeeperDashboard;
+import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperDashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,8 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SelectUserType extends AppCompatActivity {
 
-
-    String userid;
+    public static final String TAG = "Select user Type Activity";
+    TextView Welcome;
+    String userid, usermail;
     Button customer_login;
     Button shopkeeper_login;
     Button logout;
@@ -37,8 +40,11 @@ public class SelectUserType extends AppCompatActivity {
         customer_login = findViewById(R.id.customer_login);
         shopkeeper_login = findViewById(R.id.shopkeeper_login);
         logout = findViewById(R.id.Logout);
-
+        Welcome = findViewById(R.id.WelcomeUser);
         userid = user.getUid();
+        usermail = user.getEmail();
+
+        Welcome.setText("Login by: "+usermail);
 
         customer_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,13 +54,16 @@ public class SelectUserType extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.getResult().exists()){
-                                    Toast.makeText(SelectUserType.this, "Under Work", Toast.LENGTH_SHORT).show();
-                                    //startActivity(new Intent(SelectUserType.this, CustomerDashboard.class));
-                                }
-                                else {
-                                    Intent intent = new Intent(SelectUserType.this, RegisterCustomer.class);
-                                    startActivity(intent);
+                                if (task.isSuccessful()){
+                                    if(task.getResult().exists()){
+                                        startActivity(new Intent(SelectUserType.this, CustomerDashboardNew.class));
+                                    }
+                                    else {
+                                        Intent intent = new Intent(SelectUserType.this, RegisterCustomer.class);
+                                        startActivity(intent);
+                                    }
+                                } else {
+                                    Toast.makeText(SelectUserType.this, "Task Unsuccessful", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

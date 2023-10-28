@@ -94,7 +94,7 @@ public class LoginPage extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             if (mAuth.getCurrentUser().isEmailVerified()){
-                                Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginPage.this, "login Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginPage.this, SelectUserType.class));
                                 finish();
                             } else {
@@ -102,7 +102,7 @@ public class LoginPage extends AppCompatActivity {
                             }
                         }
                         else {
-                            Toast.makeText(LoginPage.this, "Login Unsuccessful "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginPage.this, "login Unsuccessful "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

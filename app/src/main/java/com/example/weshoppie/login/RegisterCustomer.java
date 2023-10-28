@@ -3,6 +3,7 @@ package com.example.weshoppie.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,14 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
 import com.example.weshoppie.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -27,7 +26,7 @@ public class RegisterCustomer extends AppCompatActivity {
 
     EditText Address_1, Address_2 , cust_city, pincode, state, Cust_Name, Cust_Phone;
     Button Cust_Register;
-    String userid;
+    String userid, usermail;
     FirebaseUser CurrentUser = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -45,6 +44,7 @@ public class RegisterCustomer extends AppCompatActivity {
         Cust_Phone = findViewById(R.id.Cust_Phone);
 
         userid = CurrentUser.getUid();
+        usermail = CurrentUser.getEmail();
 
         Cust_Register = findViewById(R.id.Cust_Register);
         Cust_Register.setOnClickListener(new View.OnClickListener() {
@@ -91,20 +91,21 @@ public class RegisterCustomer extends AppCompatActivity {
 
                 Map<String,Object> userdata = new HashMap<>();
                 userdata.put("Name",Cust_name);
-                userdata.put("Mobile Number",Cust_phone);
-                userdata.put("Address 1",Cust_add_1);
-                userdata.put("Address 2",Cust_add_2);
+                userdata.put("Mobile_Number",Cust_phone);
+                userdata.put("Address_1",Cust_add_1);
+                userdata.put("Address_2",Cust_add_2);
                 userdata.put("City",Cust_city);
                 userdata.put("Pincode",Cust_pincode);
                 userdata.put("State",Cust_state);
+                userdata.put("Email",usermail);
 
                 db.collection("Customer").document(userid).set(userdata)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(RegisterCustomer.this, "Date Saved", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(RegisterCustomer.this, ShopkeeperDashboard.class));
-                                //finish();
+                                Toast.makeText(RegisterCustomer.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegisterCustomer.this, CustomerDashboardNew.class));
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

@@ -18,15 +18,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.weshoppie.ShopkeeperDashboard;
+import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperDashboard;
 import com.example.weshoppie.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -45,7 +42,7 @@ public class RegisterShopkeeper extends AppCompatActivity {
                             "Takeout Restaurant","Tattoo Shop","Ticket Vendors","Trading Shop","Travel Agent","Truck Stop","Variety Store",
                             "Vegetable Market","Wholesaler"};
     TextView Shop_Open, Shop_Close;
-    String shop,userid;
+    String shop,userid, usermail;
     EditText Shop_Name, Shop_Address, shop_city, pincode, state, shop_description, Owner_Name, Owner_Phone;
     Button Shopkeeper_Register;
     Spinner shop_type;
@@ -81,6 +78,7 @@ public class RegisterShopkeeper extends AppCompatActivity {
 
         //Initiations *******************************************************************************
         userid = CurrentUser.getUid();
+        usermail = CurrentUser.getEmail();
 
         Shop_Name = findViewById(R.id.Shop_Name);
         Shop_Address = findViewById(R.id.Shop_Address);
@@ -204,21 +202,22 @@ public class RegisterShopkeeper extends AppCompatActivity {
 
                 //Putting values into the collection of hashmap ************************************
                 Map<String,Object> shopkeeper = new HashMap<>();
-                shopkeeper.put("Owner's Name",Ownername);
-                shopkeeper.put("Owner's Phone",Ownerphone);
-                shopkeeper.put("Shop Name",shopname);
-                shopkeeper.put("Shop Type",shoptype);
-                shopkeeper.put("Shop Address",shopaddress);
-                shopkeeper.put("Shop City",shopcity);
-                shopkeeper.put("Shop Pincode",shoppincode);
-                shopkeeper.put("Shop State",shopstate);
-                shopkeeper.put("Opening Time",shopopen);
-                shopkeeper.put("Closing Time",shopclose);
+                shopkeeper.put("Owner_Name",Ownername);
+                shopkeeper.put("Owner_Phone",Ownerphone);
+                shopkeeper.put("Shop_Name",shopname);
+                shopkeeper.put("Shop_Type",shoptype);
+                shopkeeper.put("Shop_Address",shopaddress);
+                shopkeeper.put("Shop_City",shopcity);
+                shopkeeper.put("Shop_Pincode",shoppincode);
+                shopkeeper.put("Shop_State",shopstate);
+                shopkeeper.put("Opening_Time",shopopen);
+                shopkeeper.put("Closing_Time",shopclose);
+                shopkeeper.put("Email",usermail);
 
                 if (TextUtils.isEmpty(shopdescription)){
-
+                    shopkeeper.put("Shop_Description","none");
                 } else {
-                    shopkeeper.put("Shop Description",shopdescription);
+                    shopkeeper.put("Shop_Description",shopdescription);
                 }
                 //**********************************************************************************
 

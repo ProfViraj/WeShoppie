@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/light_pink"
+    android:padding="30sp"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:text="Profile Info"
+        android:layout_margin="2sp"
+        android:background="@color/peach"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:src="@drawable/cust_profile"/>
+
+    <ProgressBar
+        android:id="@+id/profileloading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dialog_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/callCustomer"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:src="@drawable/baseline_call_24"
+            android:layout_marginEnd="20sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/dialog_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Number"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/dialog_add1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address_1"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_add2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address_2"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/dialog_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:layout_marginEnd="20sp"
+            android:visibility="gone"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/dialog_pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pincode"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout>

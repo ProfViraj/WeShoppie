@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEFD5"
+    android:background="#98d6d6"
     android:layout_margin="5sp"
-    tools:context=".ShopkeeperDashboard.ShopkeeperDashboard">
+    tools:context=".CustomerDashboard.CustomerDashboardNew">
 
     <TextView
         android:id="@+id/Weshoppie"
         android:layout_width="match_parent"
         android:layout_height="70sp"
-        android:background="@color/peach"
-        android:textSize="45sp"
-        android:textColor="@color/white"
+        android:background="#34d1d1"
         android:text="WeShoppie"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="45sp" />
 
     <TextView
         android:id="@+id/Welcome"
@@ -28,15 +28,15 @@
         android:textSize="20sp"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/cart_Orders"
+        android:id="@+id/order_History"
+        android:layout_width="174sp"
+        android:layout_height="300sp"
         android:layout_below="@+id/Weshoppie"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="17sp"
         android:layout_marginTop="50sp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="15sp"
+        app:cardElevation="5sp"
         app:cardUseCompatPadding="true">
 
         <ImageView
@@ -45,31 +45,33 @@
             android:layout_marginTop="40sp"
             android:layout_marginStart="15sp"
             android:background="@color/white"
-            app:srcCompat="@drawable/cart_orders" />
+            app:srcCompat="@drawable/order_history" />
 
         <TextView
+            android:id="@+id/order_history_text"
             android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
+            android:layout_height="39sp"
             android:layout_marginLeft="17sp"
+            android:layout_marginTop="200sp"
             android:layout_marginRight="17sp"
+            android:layout_marginBottom="30sp"
+            android:background="#34d1d1"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Cart Orders"
-            android:background="@color/peach"/>
+            android:text="Order History" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/new_Orders"
+        android:id="@+id/my_seller"
+        android:layout_width="174sp"
+        android:layout_height="300sp"
         android:layout_below="@+id/Weshoppie"
-        android:layout_toRightOf="@+id/cart_Orders"
-        android:layout_marginTop="50sp"
-        android:layout_marginStart="12sp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/order_History"
+        app:cardCornerRadius="15sp"
+        app:cardElevation="5sp"
         app:cardUseCompatPadding="true">
 
         <ImageView
@@ -78,32 +80,33 @@
             android:layout_marginTop="40sp"
             android:layout_marginStart="15sp"
             android:background="@color/white"
-            app:srcCompat="@drawable/new_orders"
-            android:contentDescription="New Orders"/>
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/my_connected_seller"/>
 
         <TextView
+            android:id="@+id/my_seller_text"
             android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
+            android:layout_height="39sp"
             android:layout_marginLeft="17sp"
+            android:layout_marginTop="200sp"
             android:layout_marginRight="17sp"
+            android:layout_marginBottom="30sp"
             android:textColor="@color/black"
+            android:background="#34d1d1"
             android:gravity="center"
-            android:text="New Orders"
-            android:background="@color/peach"/>
+            android:text="My Sellers" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/my_Customers"
-        android:layout_below="@+id/cart_Orders"
-        android:layout_marginStart="17dp"
+        android:layout_width="174sp"
+        android:layout_height="300sp"
+        android:id="@+id/place_order"
+        android:layout_below="@id/order_History"
+        android:layout_marginStart="17sp"
         android:layout_marginTop="20sp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="15sp"
+        app:cardElevation="5sp"
         app:cardUseCompatPadding="true">
 
         <ImageView
@@ -112,34 +115,35 @@
             android:layout_marginTop="40sp"
             android:layout_marginStart="15sp"
             android:background="@color/white"
-            app:srcCompat="@drawable/my_customers"/>
+            app:srcCompat="@drawable/place_order"
+            android:contentDescription="@null"/>
 
         <TextView
-            android:id="@+id/Connected_Cust"
+            android:id="@+id/place_order_text"
             android:layout_width="120sp"
-            android:layout_height="39dp"
+            android:layout_height="39sp"
             android:layout_marginTop="200sp"
             android:layout_marginBottom="30sp"
             android:layout_marginLeft="17sp"
             android:layout_marginRight="17sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="My Customers"
-            android:background="@color/peach"/>
+            android:text="Place Order"
+            android:background="#34d1d1"/>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/my_Products"
-        android:layout_below="@+id/new_Orders"
-        android:layout_toRightOf="@+id/my_Customers"
-        android:layout_marginTop="20sp"
+        android:id="@+id/custom_Orders"
+        android:layout_width="174sp"
+        android:layout_height="300sp"
+        android:layout_below="@id/my_seller"
         android:layout_marginStart="12sp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/place_order"
         android:background="#7151AA"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="15sp"
+        app:cardElevation="5sp"
         app:cardUseCompatPadding="true">
 
         <ImageView
@@ -148,22 +152,21 @@
             android:layout_marginTop="40sp"
             android:layout_marginStart="15sp"
             android:background="@color/white"
-            app:srcCompat="@drawable/myproducts2"/>
+            app:srcCompat="@drawable/logo_1_cropped"
+            android:contentDescription="@null"/>
 
         <TextView
-            android:id="@+id/productAdd"
             android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
+            android:layout_height="39sp"
             android:layout_marginLeft="17sp"
+            android:layout_marginTop="200sp"
             android:layout_marginRight="17sp"
+            android:layout_marginBottom="30sp"
             android:textColor="@color/black"
+            android:background="#34d1d1"
             android:gravity="center"
-            android:text="My Products"
-            android:background="@color/peach"/>
+            android:text="Custom Orders" />
 
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>

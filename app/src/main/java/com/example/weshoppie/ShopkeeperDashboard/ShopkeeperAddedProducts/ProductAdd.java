@@ -1,11 +1,10 @@
-package com.example.weshoppie;
+package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.weshoppie.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -91,17 +91,72 @@ public class ProductAdd extends AppCompatActivity {
                     ProductCompany = "Local";
                 }
                 String finalProductCompany = ProductCompany;
+                userid = CurrentUser.getUid();
 
-                Map<String,Object> ProductNameMap = new HashMap<>();
-                ProductNameMap.put("Product Name",ProductName);
+                //Map<String,Object> ProductNameMap = new HashMap<>();
+                //ProductNameMap.put("Product Name",ProductName);
 
                 Map<String,Object> products = new HashMap<>();
-                products.put("Product Price",ProductPrice+" Rs.");
-                products.put("Product Price per",ProductPricePer);
+                products.put("Shopkeeper_id",userid);
+                products.put("Product_Name",ProductName);
+                products.put("Product_Price",ProductPrice+" Rs.");
+                products.put("Product_Price_per",ProductPricePer);
                 products.put("Brand",ProductCompany);
 
-                userid = CurrentUser.getUid();
-                db.collection("Products").whereEqualTo("Product Name",ProductName).get()
+                db.collection("Products").whereEqualTo("Brand",ProductCompany)
+                        .whereEqualTo("Product_Name",ProductName)
+                        .whereEqualTo("Shopkeeper_id",userid)
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    if (task.getResult().isEmpty()){
+                                        db.collection("Products").add(products).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                if (task.isSuccessful()){
+                                                    Toast.makeText(ProductAdd.this, "Product Added", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(ProductAdd.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(ProductAdd.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else {
+                                        String ProductId = "";
+                                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                                            ProductId = documentSnapshot.getId();
+                                        }
+                                        db.collection("Products").document(ProductId).set(products)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(ProductAdd.this, "Product updated", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(ProductAdd.this, "Product cannon be Updated", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+                                } else {
+                                    Toast.makeText(ProductAdd.this, "Cannot Chech the database", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ProductAdd.this, "Unable to connect", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                /*db.collection("Products").whereEqualTo("Product Name",ProductName).get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -113,6 +168,19 @@ public class ProductAdd extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<DocumentReference> task) {
                                                         if (task.isSuccessful()){
                                                             String ProductId = task.getResult().getId();
+                                                            db.collection("Shopkeeper").document(userid)
+                                                                    .collection("Added Products").document(ProductId).set(ProductNameMap)
+                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                    Log.d(TAG, "onComplete: to shopkeeper");
+                                                                                }
+                                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Log.d(TAG, "onFailure: to shopkeeper");
+                                                                        }
+                                                                    });
                                                             db.collection("Products").document(ProductId)
                                                                     .collection(userid).document(finalProductCompany).set(products)
                                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -167,7 +235,7 @@ public class ProductAdd extends AppCompatActivity {
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(ProductAdd.this, "Unsuccessful" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        });*/
                 finish();
             }
         });

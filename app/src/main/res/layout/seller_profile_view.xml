@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#98d6d6"
+        android:orientation="vertical"
+        android:padding="30sp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:text="Profile Info"
+            android:layout_margin="2sp"
+            android:background="#34d1d1"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:src="@drawable/my_connected_seller"/>
+
+        <ProgressBar
+            android:id="@+id/profileloadingSeller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dialog_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shop Name"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_marginBottom="5sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/dialog_shop_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="(Shop Type)"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_marginBottom="5sp"
+                android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:gravity="center"
+            android:layout_marginBottom="5sp">
+
+            <ImageView
+                android:id="@+id/callSeller"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:src="@drawable/baseline_call_24"
+                android:layout_marginEnd="20sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/dialog_shop_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dialog_owner_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Owner name"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:layout_marginBottom="5sp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="5sp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="10sp">
+
+                <TextView
+                    android:id="@+id/dialog_open_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open at"
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/dialog_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="open"
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginStart="10sp">
+
+                <TextView
+                    android:id="@+id/dialog_close_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Close at"
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/dialog_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="close"
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dialog_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop Address"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginBottom="5sp"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30sp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="5sp">
+
+            <TextView
+                android:id="@+id/dialog_shop_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:layout_marginEnd="20sp"
+                android:textSize="20sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/dialog_shop_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pincode"
+                android:textSize="20sp"
+                android:layout_marginBottom="5sp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dialog_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop Description"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</ScrollView>

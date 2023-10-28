@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/SellerCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="7sp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:id="@+id/sellerrow"
+            android:padding="11sp">
+
+            <ImageView
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:background="#34d1d1"
+                android:contentDescription="CustomerImage"
+                android:src="@drawable/baseline_person_24"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="11sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Seller_Name"
+                    android:text="Seller Name"
+                    android:layout_marginTop="3sp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Seller_Number"
+                        android:text="Number"
+                        android:textSize="22sp"
+                        android:layout_marginTop="3sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Shop_Type"
+                        android:text="ShopType"
+                        android:textSize="22sp"
+                        android:layout_marginTop="3sp"
+                        android:layout_marginStart="5sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
