@@ -7,12 +7,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weshoppie.R;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts.ProductManage;
+import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperNewOrders.ShopkeeperNewOrders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,11 +31,32 @@ import java.util.Objects;
 public class ShopkeeperDashboard extends AppCompatActivity {
 
     static final String TAG = "Shopkeeper Dashboard Activity";
-    TextView Welcome, AddProduct, ConnectedCust;
+    TextView Welcome, AddProduct, ConnectedCust, NewOrdersText, CartOrdersText;
+    ImageView NewOrderNotification;
     String userid, Name;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser CurrentUser =mAuth.getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        db.collection("Orders").whereEqualTo("Shopkeeper_ID", userid)
+                .whereEqualTo("Status","Unpacked")
+                .whereEqualTo("Accepted",true).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            if (!task.getResult().isEmpty()){
+                                NewOrderNotification.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +64,12 @@ public class ShopkeeperDashboard extends AppCompatActivity {
 
         AddProduct = findViewById(R.id.productAdd);
         ConnectedCust = findViewById(R.id.Connected_Cust);
+        NewOrdersText = findViewById(R.id.new_Orders_text);
+        CartOrdersText = findViewById(R.id.cart_orders_text);
+        NewOrderNotification = findViewById(R.id.new_order_notification);
+
+        userid = CurrentUser.getUid();
+
         Welcome = findViewById(R.id.Welcome);
 
         db.collection("Shopkeeper").whereEqualTo("Email", CurrentUser.getEmail()).get()
@@ -63,7 +92,6 @@ public class ShopkeeperDashboard extends AppCompatActivity {
                         Toast.makeText(ShopkeeperDashboard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
         AddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +103,12 @@ public class ShopkeeperDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ShopkeeperDashboard.this, AddedCustomers.class));
+            }
+        });
+        NewOrdersText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperNewOrders.class));
             }
         });
     }

@@ -6,7 +6,7 @@
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/SellerCard"
+        android:id="@+id/NewOrderCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="7sp"
@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="155sp"
+            android:layout_height="120sp"
             android:gravity="center_vertical"
             android:id="@+id/sellerrow"
             android:padding="11sp">
@@ -22,9 +22,9 @@
             <ImageView
                 android:layout_width="70sp"
                 android:layout_height="70sp"
-                android:background="#34d1d1"
+                android:background="#FFEFD5"
                 android:contentDescription="CustomerImage"
-                android:src="@drawable/baseline_person_24"/>
+                android:src="@drawable/baseline_move_to_inbox_24"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,22 +33,11 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:drawableStart="@drawable/baseline_shopping_cart_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Shop_Name"
-                    android:text="Shop Name"
-                    android:paddingStart="5sp"
-                    android:layout_marginTop="3sp"
-                    android:textSize="22sp"
-                    android:textStyle="bold"/>
-
-                <TextView
                     android:drawableStart="@drawable/baseline_person_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Seller_Name"
-                    android:text="Seller Name"
+                    android:id="@+id/Customer_Name"
+                    android:text="Customer Name"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
                     android:textSize="22sp"
@@ -58,7 +47,7 @@
                     android:drawableStart="@drawable/baseline_call_24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Seller_Number"
+                    android:id="@+id/Customer_Number"
                     android:text="Number"
                     android:textSize="22sp"
                     android:paddingStart="5sp"
@@ -66,11 +55,11 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:drawableStart="@drawable/baseline_category_24"
+                    android:drawableStart="@drawable/baseline_key_24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Shop_Type"
-                    android:text="ShopType"
+                    android:id="@+id/OrderID"
+                    android:text="OrderID"
                     android:textSize="22sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"

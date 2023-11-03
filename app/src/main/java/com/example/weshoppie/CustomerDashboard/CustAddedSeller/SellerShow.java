@@ -18,6 +18,23 @@ public class SellerShow {
     }
 
     String Name;
+
+    public SellerShow(String name, String shop_Name, String shop_Type, String phone) {
+        this.Name = name;
+        this.Shop_Name = shop_Name;
+        this.Shop_Type = shop_Type;
+        this.Phone = phone;
+    }
+
+    public String getShop_Name() {
+        return Shop_Name;
+    }
+
+    public void setShop_Name(String shop_Name) {
+        Shop_Name = shop_Name;
+    }
+
+    String Shop_Name;
     String Shop_Type;
 
     public String getPhone() {
@@ -39,12 +56,6 @@ public class SellerShow {
     }
 
     String documentID;
-
-    public SellerShow(String name, String shop_Type, String phone) {
-        this.Name = name;
-        this.Shop_Type = shop_Type;
-        this.Phone = phone;
-    }
 
     public SellerShow() {
     }

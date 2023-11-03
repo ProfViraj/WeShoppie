@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +7,7 @@
     android:layout_margin="5sp"
     android:background="#98d6d6"
     android:orientation="vertical"
-    tools:context=".CustomerDashboard.CustAddedSeller.MySellers">
+    tools:context=".CustomerDashboard.CustPlaceOrder.PlaceOrderSellerList">
 
     <TextView
         android:layout_width="match_parent"
@@ -21,6 +20,7 @@
         android:textStyle="bold"/>
 
     <ProgressBar
+        android:id="@+id/prgg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
@@ -35,7 +35,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recyclerSeller"/>
+            android:id="@+id/recyclerSellerPlaceOrder"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

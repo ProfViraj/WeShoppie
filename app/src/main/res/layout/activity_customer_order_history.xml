@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,12 +7,12 @@
     android:layout_margin="5sp"
     android:background="#98d6d6"
     android:orientation="vertical"
-    tools:context=".CustomerDashboard.CustAddedSeller.MySellers">
+    tools:context=".CustomerDashboard.OrderHistory.CustomerOrderHistory">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70sp"
-        android:text="My Sellers"
+        android:text="Order History"
         android:layout_margin="2sp"
         android:background="#34d1d1"
         android:textSize="30sp"

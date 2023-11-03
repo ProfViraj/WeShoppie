@@ -4,9 +4,6 @@ public class ProductModel {
     String Product_Price;
     String Product_Price_per;
     String Brand;
-
-
-
     String documentID;
 
     public ProductModel() {

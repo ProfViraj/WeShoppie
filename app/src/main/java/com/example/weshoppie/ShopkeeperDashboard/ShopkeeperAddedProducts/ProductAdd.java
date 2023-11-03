@@ -145,7 +145,7 @@ public class ProductAdd extends AppCompatActivity {
                                                 });
                                     }
                                 } else {
-                                    Toast.makeText(ProductAdd.this, "Cannot Chech the database", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ProductAdd.this, "Cannot Check the database", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -154,88 +154,6 @@ public class ProductAdd extends AppCompatActivity {
                                 Toast.makeText(ProductAdd.this, "Unable to connect", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-
-                /*db.collection("Products").whereEqualTo("Product Name",ProductName).get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
-                                    if (task.getResult().isEmpty()){
-                                        db.collection("Products").add(ProductNameMap)
-                                                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                        if (task.isSuccessful()){
-                                                            String ProductId = task.getResult().getId();
-                                                            db.collection("Shopkeeper").document(userid)
-                                                                    .collection("Added Products").document(ProductId).set(ProductNameMap)
-                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                @Override
-                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                    Log.d(TAG, "onComplete: to shopkeeper");
-                                                                                }
-                                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                                        @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-                                                                            Log.d(TAG, "onFailure: to shopkeeper");
-                                                                        }
-                                                                    });
-                                                            db.collection("Products").document(ProductId)
-                                                                    .collection(userid).document(finalProductCompany).set(products)
-                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                        @Override
-                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                            Toast.makeText(ProductAdd.this, "Successfully Added", Toast.LENGTH_SHORT).show();
-                                                                            Log.d(TAG, "onComplete: Successfully added and set");
-                                                                        }
-                                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                                        @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-                                                                            Toast.makeText(ProductAdd.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                            Log.d(TAG, "onFailure: Successfully added but not set");
-                                                                        }
-                                                                    });
-                                                        }
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(ProductAdd.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                        Log.d(TAG, "onFailure: "+ e.getMessage());
-                                                    }
-                                                });
-                                    } else {
-                                        String ProductId = "";
-                                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                            ProductId = documentSnapshot.getId();
-                                        }
-                                        db.collection("Products").document(ProductId)
-                                                .collection(userid).document(finalProductCompany).set(products)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        Toast.makeText(ProductAdd.this, "Successfully Added", Toast.LENGTH_SHORT).show();
-                                                        Log.d(TAG, "onComplete: Successfully added and set");
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(ProductAdd.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                        Log.d(TAG, "onFailure: Successfully added but not set");
-                                                    }
-                                                });
-                                    }
-                                } else {
-                                    Toast.makeText(ProductAdd.this, "Unsuccessful getting product information", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ProductAdd.this, "Unsuccessful" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });*/
                 finish();
             }
         });

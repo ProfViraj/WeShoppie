@@ -13,6 +13,24 @@
         android:theme="@style/Theme.WeShoppie"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.SeeOrderPlaced.OrderPlaced"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.OrderHistory.CustomerOrderHistory"
+            android:exported="false" />
+        <activity
+            android:name=".ShopkeeperDashboard.ShopkeeperNewOrders.ProductStatus.SeeUnpackedProducts"
+            android:exported="false" />
+        <activity
+            android:name=".ShopkeeperDashboard.ShopkeeperNewOrders.ShopkeeperNewOrders"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.SeeProducts"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.PlaceOrderSellerList"
+            android:exported="false" />
+        <activity
             android:name=".CustomerDashboard.CustAddedSeller.MySellers"
             android:exported="false" />
         <activity

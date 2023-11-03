@@ -1,5 +1,6 @@
 package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerProductAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ProductModel productModel = arrProducts.get(position);
         holder.Pname.setText(productModel.Product_Name);
         holder.Pprice.setText(productModel.Product_Price);

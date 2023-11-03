@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5sp"
+    android:orientation="vertical"
+    android:background="#98d6d6"
+    tools:context=".CustomerDashboard.CustPlaceOrder.SeeProducts">
+
+    <TextView
+        android:id="@+id/Shopname"
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:text="Shop Name"
+        android:layout_margin="2sp"
+        android:background="#34d1d1"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please select the count and then tick the checkbox"
+        android:gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Press the floating button after ordering"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSellerProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70sp"/>
+
+        <Button
+            android:id="@+id/cancel_order"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:text="Cancel Order"
+            android:textSize="25sp"
+            android:padding="18sp"
+            android:drawableEnd="@drawable/baseline_cancel_24"/>
+
+        <Button
+            android:id="@+id/place_order"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="Place Order"
+            android:textSize="25sp"
+            android:padding="18sp"
+            android:drawableEnd="@drawable/baseline_send_24"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

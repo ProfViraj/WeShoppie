@@ -38,9 +38,10 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull SellerAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         SellerShow Seller = sellerShowArrayList.get(position);
-        holder.Seller_Name.setText(Seller.Name);
-        holder.Seller_Number.setText(Seller.Phone);
-        holder.Shop_Type.setText(Seller.Shop_Type);
+        holder.Seller_Name.setText("   "+Seller.Name+"   ");
+        holder.Seller_Number.setText("   "+Seller.Phone+"   ");
+        holder.Shop_Type.setText(" ( "+ Seller.Shop_Type + " ) ");
+        holder.Shop_Name.setText("   "+Seller.Shop_Name+"   ");
 
         holder.sellerCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +57,14 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.MyViewHold
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Seller_Name, Seller_Number, Shop_Type;
+        TextView Seller_Name, Seller_Number, Shop_Type, Shop_Name;
         CardView sellerCard;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Seller_Name = itemView.findViewById(R.id.Seller_Name);
             Seller_Number = itemView.findViewById(R.id.Seller_Number);
             Shop_Type = itemView.findViewById(R.id.Shop_Type);
+            Shop_Name = itemView.findViewById(R.id.Shop_Name);
             sellerCard = itemView.findViewById(R.id.SellerCard);
         }
     }

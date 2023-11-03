@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weshoppie.CustomerDashboard.CustAddedSeller.MySellers;
+import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.PlaceOrderSellerList;
+import com.example.weshoppie.CustomerDashboard.OrderHistory.CustomerOrderHistory;
 import com.example.weshoppie.R;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperDashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,20 +60,20 @@ public class CustomerDashboardNew extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
+                        Toast.makeText(CustomerDashboardNew.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
         OrderHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(CustomerDashboardNew.this, CustomerOrderHistory.class));
             }
         });
 
         PlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(CustomerDashboardNew.this, PlaceOrderSellerList.class));
             }
         });
 

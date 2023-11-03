@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5sp"
-    android:background="#98d6d6"
     android:orientation="vertical"
-    tools:context=".CustomerDashboard.CustAddedSeller.MySellers">
+    android:layout_margin="5sp"
+    android:background="#FFEFD5"
+    tools:context=".ShopkeeperDashboard.ShopkeeperNewOrders.ShopkeeperNewOrders">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70sp"
-        android:text="My Sellers"
+        android:text="New Orders"
         android:layout_margin="2sp"
-        android:background="#34d1d1"
+        android:background="@color/peach"
         android:textSize="30sp"
-        android:gravity="center"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:gravity="center"/>
 
     <ProgressBar
+        android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
         android:layout_gravity="center"
         android:visibility="gone"/>
 
@@ -35,7 +34,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recyclerSeller"/>
+            android:id="@+id/recyclerNewOrder"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
