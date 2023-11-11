@@ -13,6 +13,18 @@
         android:theme="@style/Theme.WeShoppie"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerDashboard.CustAddedSeller.SameNumDiffSellers.SameNumDiffSellers"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustAddedSeller.AddSeller"
+            android:exported="false" />
+        <activity
+            android:name=".ShopkeeperDashboard.ShopkeeperCartOrders.ShopkeeperCartOrders"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.OrderHistory.SeeOrderDetails.SeeOrderDetails"
+            android:exported="false" />
+        <activity
             android:name=".CustomerDashboard.CustPlaceOrder.SeeOrderPlaced.OrderPlaced"
             android:exported="false" />
         <activity
@@ -35,9 +47,6 @@
             android:exported="false" />
         <activity
             android:name=".CustomerDashboard.CustomerDashboardNew"
-            android:exported="false" />
-        <activity
-            android:name=".CustomerDashboard.CustomerDashboard"
             android:exported="false" />
         <activity
             android:name=".ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers"

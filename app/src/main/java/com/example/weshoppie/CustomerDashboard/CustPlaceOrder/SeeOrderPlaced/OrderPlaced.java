@@ -181,14 +181,6 @@ public class OrderPlaced extends AppCompatActivity {
                                                     OrderedProductModel opm = documentChange.getDocument().toObject(OrderedProductModel.class);
                                                     orderedProductModelArrayList.add(opm);
                                                 }
-                                                if (documentChange.getType() == DocumentChange.Type.MODIFIED){
-                                                    @SuppressLint("UnsafeIntentLaunch") Intent i = getIntent();
-                                                    overridePendingTransition(0, 0);
-                                                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                                    finish();
-                                                    overridePendingTransition(0, 0);
-                                                    startActivity(i);
-                                                }
                                                 orderedProductAdapter.notifyDataSetChanged();
                                             }
                                         }

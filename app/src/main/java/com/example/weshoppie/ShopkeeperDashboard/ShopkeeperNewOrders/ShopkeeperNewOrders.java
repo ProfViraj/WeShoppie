@@ -66,14 +66,6 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
                                 nom.setDocumentID(dc.getDocument().getId());
                                 arrNewOrderModel.add(nom);
                             }
-                            if (dc.getType() == DocumentChange.Type.MODIFIED){
-                                @SuppressLint("UnsafeIntentLaunch") Intent intent = getIntent();
-                                overridePendingTransition(0, 0);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(intent);
-                            }
                             recyclerNewProductAdapter.notifyDataSetChanged();
                         }
                     }
@@ -86,5 +78,6 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
         Intent intent = new Intent(ShopkeeperNewOrders.this, SeeUnpackedProducts.class);
         intent.putExtra("OrderID",orderID);
         startActivity(intent);
+        finish();
     }
 }

@@ -92,5 +92,6 @@ public class PlaceOrderSellerList extends AppCompatActivity implements SelectSel
         Intent intent = new Intent(PlaceOrderSellerList.this, SeeProducts.class);
         intent.putExtra("OwnerId", docId);
         startActivity(intent);
+        finish();
     }
 }

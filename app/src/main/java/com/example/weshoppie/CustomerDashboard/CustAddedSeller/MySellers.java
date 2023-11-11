@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.CustomerAda
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -38,6 +40,7 @@ import java.util.jar.Attributes;
 public class MySellers extends AppCompatActivity implements SelectSeller{
 
     public static final String TAG = "My Sellers Activity";
+    FloatingActionButton seller_add;
     String userID;
     RecyclerView recyclerView;
     ArrayList<SellerShow> sellerShowArrayList;
@@ -49,6 +52,15 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sellers);
+
+        seller_add = findViewById(R.id.seller_add);
+        seller_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MySellers.this, AddSeller.class));
+                finish();
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerSeller);
         recyclerView.setHasFixedSize(true);

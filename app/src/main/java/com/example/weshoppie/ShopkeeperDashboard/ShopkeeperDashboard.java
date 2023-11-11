@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.weshoppie.R;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts.ProductManage;
+import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.ShopkeeperCartOrders;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperNewOrders.ShopkeeperNewOrders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,6 +52,8 @@ public class ShopkeeperDashboard extends AppCompatActivity {
                         if (task.isSuccessful()){
                             if (!task.getResult().isEmpty()){
                                 NewOrderNotification.setVisibility(View.VISIBLE);
+                            } else {
+                                NewOrderNotification.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -92,6 +95,12 @@ public class ShopkeeperDashboard extends AppCompatActivity {
                         Toast.makeText(ShopkeeperDashboard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+        CartOrdersText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperCartOrders.class));
+            }
+        });
         AddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -185,13 +185,6 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                                 spm.setDocumentID(dc.getDocument().getId());
                                 arrSelectProducts.add(spm);
                             }
-                            if (dc.getType() == DocumentChange.Type.MODIFIED){
-                                overridePendingTransition(0, 0);
-                                fromAct.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(fromAct);
-                            }
                             selectProductAdapter.notifyDataSetChanged();
                         }
                     }

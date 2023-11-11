@@ -40,7 +40,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
     UnpackedProductAdapter unpackedProductAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser CurrentUser = mAuth.getCurrentUser();
-    FirebaseFirestore db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +65,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
                                     } else {
                                         db.collection("Orders").document(OrderID)
                                                 .update("Status","Packed");
+                                        finish();
                                     }
                                 }
                             }
@@ -77,7 +78,6 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
         recyclerUnpackedProduct.setHasFixedSize(true);
         recyclerUnpackedProduct.setLayoutManager(new LinearLayoutManager(this));
 
-        db = FirebaseFirestore.getInstance();
         unpackedProductsModelArrayList = new ArrayList<UnpackedProductsModel>();
         unpackedProductAdapter = new UnpackedProductAdapter(SeeUnpackedProducts.this, unpackedProductsModelArrayList, this);
         recyclerUnpackedProduct.setAdapter(unpackedProductAdapter);

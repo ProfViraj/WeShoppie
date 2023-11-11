@@ -1,181 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFEFD5"
-    android:layout_margin="5sp"
     tools:context=".ShopkeeperDashboard.ShopkeeperDashboard">
 
-    <TextView
-        android:id="@+id/Weshoppie"
-        android:layout_width="match_parent"
-        android:layout_height="70sp"
-        android:background="@color/peach"
-        android:textSize="45sp"
-        android:textColor="@color/white"
-        android:text="WeShoppie"
-        android:textAlignment="center"/>
-
-    <TextView
-        android:id="@+id/Welcome"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:gravity="center"
-        android:layout_below="@+id/Weshoppie"
-        android:textSize="20sp"/>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/cart_Orders"
-        android:layout_below="@+id/Weshoppie"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="50sp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
-
-        <ImageView
-            android:layout_width="125sp"
-            android:layout_height="125sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginStart="15sp"
-            android:background="@color/white"
-            app:srcCompat="@drawable/cart_orders" />
+        android:background="#FFEFD5"
+        android:layout_margin="5sp">
 
         <TextView
-            android:id="@+id/cart_orders_text"
-            android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
-            android:layout_marginLeft="17sp"
-            android:layout_marginRight="17sp"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="Cart Orders"
-            android:background="@color/peach"/>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/new_Orders"
-        android:layout_below="@+id/Weshoppie"
-        android:layout_toRightOf="@+id/cart_Orders"
-        android:layout_marginTop="50sp"
-        android:layout_marginStart="12sp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
-
-        <ImageView
-            android:id="@+id/new_order_notification"
-            android:layout_width="25sp"
-            android:layout_height="25sp"
-            android:src="@drawable/baseline_new_releases_24"
-            android:layout_gravity="top|right"
-            android:layout_marginTop="10sp"
-            android:layout_marginEnd="10sp"
-            android:visibility="gone"/>
-
-        <ImageView
-            android:layout_width="125sp"
-            android:layout_height="125sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginStart="15sp"
-            android:background="@color/white"
-            app:srcCompat="@drawable/new_orders"
-            android:contentDescription="New Orders"/>
+            android:id="@+id/Weshoppie"
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:background="@color/peach"
+            android:textSize="45sp"
+            android:textColor="@color/white"
+            android:text="WeShoppie"
+            android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/new_Orders_text"
-            android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
-            android:layout_marginLeft="17sp"
-            android:layout_marginRight="17sp"
-            android:textColor="@color/black"
+            android:id="@+id/Welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
             android:gravity="center"
-            android:text="New Orders"
-            android:background="@color/peach"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/my_Customers"
-        android:layout_below="@+id/cart_Orders"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="20sp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
-
-        <ImageView
-            android:layout_width="125sp"
-            android:layout_height="125sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginStart="15sp"
-            android:background="@color/white"
-            app:srcCompat="@drawable/my_customers"/>
-
-        <TextView
-            android:id="@+id/Connected_Cust"
-            android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
-            android:layout_marginLeft="17sp"
-            android:layout_marginRight="17sp"
             android:textColor="@color/black"
-            android:gravity="center"
-            android:text="My Customers"
-            android:background="@color/peach"/>
+            android:layout_below="@+id/Weshoppie"
+            android:textSize="20sp"/>
 
-    </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:id="@+id/first_lls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Welcome"
+            android:gravity="center">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="174dp"
-        android:layout_height="300dp"
-        android:id="@+id/my_Products"
-        android:layout_below="@+id/new_Orders"
-        android:layout_toRightOf="@+id/my_Customers"
-        android:layout_marginTop="20sp"
-        android:layout_marginStart="12sp"
-        android:background="#7151AA"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
+            <androidx.cardview.widget.CardView
+                android:layout_width="174dp"
+                android:layout_height="300dp"
+                android:id="@+id/cart_Orders"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:layout_width="125sp"
-            android:layout_height="125sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginStart="15sp"
-            android:background="@color/white"
-            app:srcCompat="@drawable/myproducts2"/>
+                <ImageView
+                    android:layout_width="125sp"
+                    android:layout_height="125sp"
+                    android:layout_marginTop="40sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/cart_orders" />
 
-        <TextView
-            android:id="@+id/productAdd"
-            android:layout_width="120sp"
-            android:layout_height="39dp"
-            android:layout_marginTop="200sp"
-            android:layout_marginBottom="30sp"
-            android:layout_marginLeft="17sp"
-            android:layout_marginRight="17sp"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="My Products"
-            android:background="@color/peach"/>
+                <TextView
+                    android:id="@+id/cart_orders_text"
+                    android:layout_width="120sp"
+                    android:layout_height="39dp"
+                    android:layout_marginTop="200sp"
+                    android:layout_marginBottom="30sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="Cart Orders"
+                    android:background="@color/peach"/>
+            </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="174dp"
+                android:layout_height="300dp"
+                android:id="@+id/new_Orders"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
 
+                <ImageView
+                    android:id="@+id/new_order_notification"
+                    android:layout_width="25sp"
+                    android:layout_height="25sp"
+                    android:src="@drawable/baseline_new_releases_24"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginEnd="10sp"
+                    android:visibility="gone"/>
 
-</RelativeLayout>
+                <ImageView
+                    android:layout_width="125sp"
+                    android:layout_height="125sp"
+                    android:layout_marginTop="40sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/new_orders"
+                    android:contentDescription="New Orders"/>
+
+                <TextView
+                    android:id="@+id/new_Orders_text"
+                    android:layout_width="120sp"
+                    android:layout_height="39dp"
+                    android:layout_marginTop="200sp"
+                    android:layout_marginBottom="30sp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="New Orders"
+                    android:background="@color/peach"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/first_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/first_lls"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="174dp"
+                android:layout_height="300dp"
+                android:id="@+id/my_Customers"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <ImageView
+                    android:layout_width="125sp"
+                    android:layout_height="125sp"
+                    android:layout_marginTop="40sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/my_customers"/>
+
+                <TextView
+                    android:id="@+id/Connected_Cust"
+                    android:layout_width="120sp"
+                    android:layout_height="39dp"
+                    android:layout_marginTop="200sp"
+                    android:layout_marginBottom="30sp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="My Customers"
+                    android:background="@color/peach"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="174dp"
+                android:layout_height="300dp"
+                android:id="@+id/my_Products"
+                app:cardBackgroundColor="@color/white"
+                android:background="#7151AA"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <ImageView
+                    android:layout_width="125sp"
+                    android:layout_height="125sp"
+                    android:layout_marginTop="40sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/myproducts2"/>
+
+                <TextView
+                    android:id="@+id/productAdd"
+                    android:layout_width="120sp"
+                    android:layout_height="39dp"
+                    android:layout_marginTop="200sp"
+                    android:layout_marginBottom="30sp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="My Products"
+                    android:background="@color/peach"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
