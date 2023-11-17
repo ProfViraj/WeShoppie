@@ -19,6 +19,10 @@ public class UnpackedProductAdapter extends RecyclerView.Adapter<UnpackedProduct
     Context context;
     ArrayList<UnpackedProductsModel> unpackedProductsModelArrayList;
     SelectUnpackedProduct selectUnpackedProduct;
+    public void setFilteredList (ArrayList<UnpackedProductsModel> filteredList){
+        this.unpackedProductsModelArrayList = filteredList;
+        notifyDataSetChanged();
+    }
 
     public UnpackedProductAdapter(Context context, ArrayList<UnpackedProductsModel> unpackedProductsModelArrayList, SelectUnpackedProduct selectUnpackedProduct) {
         this.context = context;

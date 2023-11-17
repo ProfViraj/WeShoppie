@@ -2,6 +2,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperNewOrders;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewOrder{
 
     RecyclerView recyclerNewOrder;
+    SearchView searchView;
     String userID;
     ArrayList<NewOrderModel> arrNewOrderModel;
     RecyclerNewProductAdapter recyclerNewProductAdapter;
@@ -36,6 +38,21 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper_new_orders);
+
+        searchView = findViewById(R.id.searchViewNewOrders);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
 
         recyclerNewOrder = findViewById(R.id.recyclerNewOrder);
         recyclerNewOrder.setHasFixedSize(true);
@@ -50,8 +67,23 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
         EventChangeListener();
     }
 
+    private void filterList(String newText) {
+        ArrayList<NewOrderModel> filteredList = new ArrayList<NewOrderModel>();
+        for (NewOrderModel item : arrNewOrderModel){
+            if (item.getCustomer_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such New Order exists", Toast.LENGTH_SHORT).show();
+        } else {
+            recyclerNewProductAdapter.setFilteredList(filteredList);
+        }
+    }
+
     private void EventChangeListener() {
         db.collection("Orders").whereEqualTo("Shopkeeper_ID",userID).whereEqualTo("Status","Unpacked")
+                .whereEqualTo("Accepted", true).whereEqualTo("Delivered", false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override

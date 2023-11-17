@@ -158,6 +158,16 @@
                 app:cardUseCompatPadding="true">
 
                 <ImageView
+                    android:id="@+id/packed_order_notification"
+                    android:layout_width="25sp"
+                    android:layout_height="25sp"
+                    android:src="@drawable/baseline_new_releases_24_blue"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginEnd="10sp"
+                    android:visibility="gone"/>
+
+                <ImageView
                     android:layout_width="125sp"
                     android:layout_height="125sp"
                     android:layout_marginTop="40sp"
@@ -167,6 +177,7 @@
                     android:contentDescription="@null"/>
 
                 <TextView
+                    android:id="@+id/custom_orders_text"
                     android:layout_width="120sp"
                     android:layout_height="39sp"
                     android:layout_marginLeft="17sp"

@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeOrderPlaced.OrderedProductAdapter;
 import com.example.weshoppie.R;
 
 import java.util.ArrayList;

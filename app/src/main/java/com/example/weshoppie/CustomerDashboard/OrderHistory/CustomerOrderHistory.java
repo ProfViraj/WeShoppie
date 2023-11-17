@@ -2,25 +2,17 @@ package com.example.weshoppie.CustomerDashboard.OrderHistory;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.weshoppie.CustomerDashboard.CustAddedSeller.MySellers;
-import com.example.weshoppie.CustomerDashboard.CustAddedSeller.SellerAdapter;
-import com.example.weshoppie.CustomerDashboard.CustAddedSeller.SellerShow;
-import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeOrderPlaced.OrderPlaced;
 import com.example.weshoppie.CustomerDashboard.OrderHistory.SeeOrderDetails.SeeOrderDetails;
 import com.example.weshoppie.R;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts.ProductManage;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts.ProductModel;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.ShopkeeperOrderModel;
+import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.UndeliveredOrders.ShopkeeperOrderModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -33,6 +25,7 @@ import java.util.ArrayList;
 
 public class CustomerOrderHistory extends AppCompatActivity implements SelectOrder{
     String userID , Order_ID;
+    SearchView searchView;
     RecyclerView recyclerView;
     ArrayList<OrderHistoryModel> orderHistoryModelArrayList;
     OrderHistoryAdapter orderHistoryAdapter;
@@ -44,6 +37,21 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order_history);
+
+        searchView = findViewById(R.id.searchViewCustOrderHistory);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerOrderHistory);
         recyclerView.setHasFixedSize(true);
@@ -58,9 +66,23 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
         EventChangeListener();
     }
 
+    private void filterList(String newText) {
+        ArrayList<OrderHistoryModel> filteredList = new ArrayList<OrderHistoryModel>();
+        for (OrderHistoryModel orderHistoryModel : orderHistoryModelArrayList){
+            if (orderHistoryModel.getShop_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(orderHistoryModel);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Shop Exists", Toast.LENGTH_SHORT).show();
+        } else {
+            orderHistoryAdapter.setFilteredList(filteredList);
+        }
+    }
+
     private void EventChangeListener() {
         db.collection("Orders").whereEqualTo("Customer_ID", userID)
-                .whereEqualTo("Accepted", true)
+                .whereEqualTo("Accepted", true).whereEqualTo("Delivered",true)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -88,11 +110,6 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
         intent.putExtra("Date",orderHistoryModel.getTime());
         intent.putExtra("ShopId", orderHistoryModel.getShopkeeper_ID());
         startActivity(intent);
-
-    }
-
-    @Override
-    public void onOrderSelected(ShopkeeperOrderModel shopkeeperOrderModel) {
 
     }
 }

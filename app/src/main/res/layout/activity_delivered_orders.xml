@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5sp"
+    android:background="#FFEFD5"
+    android:orientation="vertical"
+    tools:context=".ShopkeeperDashboard.ShopkeeperCartOrders.DeliveredOrders.DeliveredOrders">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:text="Delivered Order"
+        android:layout_marginTop="20sp"
+        android:background="@color/peach"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewDeliveredOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_linear"
+        app:queryHint="Search Here..."
+        app:iconifiedByDefault="false"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerDeliveredOrderHistory"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

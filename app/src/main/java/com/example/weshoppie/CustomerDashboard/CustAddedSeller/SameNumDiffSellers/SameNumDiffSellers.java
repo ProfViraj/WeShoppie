@@ -3,6 +3,7 @@ package com.example.weshoppie.CustomerDashboard.CustAddedSeller.SameNumDiffSelle
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,7 @@ import java.util.Map;
 
 public class SameNumDiffSellers extends AppCompatActivity implements SelectRegisterShop{
     RecyclerView recyclerView;
+    SearchView searchView;
     ArrayList<RegisteredShopModel> registeredShopModelArrayList;
     RegisteredShopsAdapter registeredShopsAdapter;
     String SellerNumber, UserId, Name, Mobile_Number;
@@ -45,6 +47,21 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
 
         fromAct = getIntent();
         SellerNumber = fromAct.getStringExtra("SellerNumber");
+
+        searchView = findViewById(R.id.searchViewRegisteredShops);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerRegisteredShops);
         recyclerView.setHasFixedSize(true);
@@ -73,6 +90,23 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
                 });
         EventChangeListener();
 
+    }
+
+    private void filterList(String newText) {
+        ArrayList<RegisteredShopModel> filteredList = new ArrayList<RegisteredShopModel>();
+        for (RegisteredShopModel item : registeredShopModelArrayList){
+            if (item.getOwner_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+            if (item.getShop_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Shop exists", Toast.LENGTH_SHORT).show();
+        } else {
+            registeredShopsAdapter.setFilteredList(filteredList);
+        }
     }
 
     private void EventChangeListener() {

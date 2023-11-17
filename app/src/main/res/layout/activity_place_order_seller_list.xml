@@ -7,23 +7,31 @@
     android:layout_margin="5sp"
     android:background="#98d6d6"
     android:orientation="vertical"
-    tools:context=".CustomerDashboard.CustPlaceOrder.PlaceOrderSellerList">
+    tools:context=".CustomerDashboard.CustPlaceOrder.NewOrderPlace.PlaceOrderSellerList">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="My Sellers"
-        android:layout_margin="2sp"
+        android:layout_marginTop="20sp"
         android:background="#34d1d1"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:gravity="center"
         android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewCustPlaceOrderMySellers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_linear"
+        app:queryHint="Search Here..."
+        app:iconifiedByDefault="false"/>
 
     <ProgressBar
         android:id="@+id/prgg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
         android:layout_gravity="center"
         android:visibility="gone"/>
 

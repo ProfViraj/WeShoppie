@@ -1,4 +1,4 @@
-package com.example.weshoppie.CustomerDashboard.CustPlaceOrder;
+package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,6 +21,10 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
     ArrayList<SelectProductModel> selectProductModels;
     ArrayList<SelectProductModel> selectedProductList = new ArrayList<>();
     SelectCount selectCount;
+    public void setFilteredList (ArrayList<SelectProductModel> filteredList){
+        this.selectedProductList = filteredList;
+        notifyDataSetChanged();
+    }
 
     public SelectProductAdapter(Context context, ArrayList<SelectProductModel> selectProductModels, SelectCount selectCount) {
         this.context = context;

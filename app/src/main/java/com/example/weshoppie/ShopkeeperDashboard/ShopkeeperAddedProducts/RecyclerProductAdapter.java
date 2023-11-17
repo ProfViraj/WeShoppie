@@ -26,6 +26,11 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
     Context context;
     ArrayList<ProductModel> arrProducts;
     FirebaseFirestore db;
+
+    public void setFilteredList (ArrayList<ProductModel> filteredList){
+        this.arrProducts = filteredList;
+        notifyDataSetChanged();
+    }
     public RecyclerProductAdapter(Context context, ArrayList<ProductModel> arrProducts){
         this.context = context;
         this.arrProducts = arrProducts;

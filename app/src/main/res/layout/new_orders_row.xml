@@ -9,6 +9,7 @@
         android:id="@+id/NewOrderCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:cardCornerRadius="7sp"
         app:cardUseCompatPadding="true">
 
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="120sp"
             android:gravity="center_vertical"
+            android:background="@color/white"
             android:id="@+id/sellerrow"
             android:padding="11sp">
 
@@ -38,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Customer_Name"
                     android:text="Customer Name"
+                    android:textColor="@color/black"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
                     android:textSize="22sp"
@@ -49,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Customer_Number"
                     android:text="Number"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
@@ -60,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/OrderID"
                     android:text="OrderID"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"

@@ -1,7 +1,15 @@
-package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders;
+package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.UndeliveredOrders;
 
 public class ShopkeeperOrderModel {
-    String documentID, Status, Time, Customer_ID;
+    String documentID, Status, Time, Customer_ID, Cust_Name;
+
+    public String getCust_Name() {
+        return Cust_Name;
+    }
+
+    public void setCust_Name(String cust_Name) {
+        Cust_Name = cust_Name;
+    }
 
     public ShopkeeperOrderModel() {
     }

@@ -9,6 +9,7 @@
         android:id="@+id/RegisteredShopCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:cardCornerRadius="7sp"
         app:cardUseCompatPadding="true">
 
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:background="@color/white"
             android:id="@+id/custrow"
             android:padding="11sp">
 
@@ -37,6 +39,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/ShopName"
                     android:text="Shop Name"
+                    android:textColor="@color/black"
                     android:layout_marginTop="3sp"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
@@ -46,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/ShopType"
                     android:text="Shop Type"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:layout_marginTop="3sp"
                     android:textStyle="bold"/>

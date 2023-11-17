@@ -36,6 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product Name"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
 
@@ -49,12 +50,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Price"
+                        android:textColor="@color/black"
                         android:textSize="18sp"/>
 
                     <TextView
                         android:id="@+id/per_invoice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="Per"
                         android:textSize="18sp"
                         android:layout_marginStart="8sp"/>
@@ -64,6 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Company"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
                         android:layout_marginStart="8sp"/>
 
@@ -76,6 +80,7 @@
                 android:layout_toRightOf="@+id/details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Count"
                 android:textSize="20sp"
                 android:layout_centerVertical="true"/>
@@ -85,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cost"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginStart="15sp"
                 android:layout_alignParentRight="true"

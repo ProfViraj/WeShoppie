@@ -3,6 +3,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperNewOrders.ProductSta
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ import java.util.Map;
 public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpackedProduct{
 
     Intent fromAct;
+    SearchView searchView;
     String OrderID;
     ArrayList<UnpackedProductsModel> unpackedProductsModelArrayList;
     RecyclerView recyclerUnpackedProduct;
@@ -48,6 +50,21 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
 
         fromAct = getIntent();
         OrderID = fromAct.getStringExtra("OrderID");
+
+        searchView = findViewById(R.id.searchViewUnpackedProducts);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
 
         PackingDone = findViewById(R.id.packing_done);
         PackingDone.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +101,20 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
         Toast.makeText(this, OrderID, Toast.LENGTH_SHORT).show();
 
         CheckIfAllPacked();
+    }
+
+    private void filterList(String newText) {
+        ArrayList<UnpackedProductsModel> filteredList = new ArrayList<UnpackedProductsModel>();
+        for (UnpackedProductsModel item : unpackedProductsModelArrayList){
+            if (item.getProduct_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Product is Unpacked", Toast.LENGTH_SHORT).show();
+        } else {
+            unpackedProductAdapter.setFilteredList(filteredList);
+        }
     }
 
     private void CheckIfAllPacked() {

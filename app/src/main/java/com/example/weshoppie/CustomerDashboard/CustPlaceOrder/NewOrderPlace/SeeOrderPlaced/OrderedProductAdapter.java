@@ -1,4 +1,4 @@
-package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeOrderPlaced;
+package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SelectProductAdapter;
 import com.example.weshoppie.R;
 
 import java.util.ArrayList;

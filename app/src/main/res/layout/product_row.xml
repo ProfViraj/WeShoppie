@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:cardCornerRadius="7sp"
         app:cardUseCompatPadding="true">
 
@@ -39,6 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product Name"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
 
@@ -52,6 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Price"
+                        android:textColor="@color/black"
                         android:textSize="18sp"/>
 
                     <TextView
@@ -59,6 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Per"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
                         android:layout_marginStart="8sp"/>
 
@@ -67,6 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Company"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
                         android:layout_marginStart="8sp"/>
 

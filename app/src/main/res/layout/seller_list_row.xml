@@ -9,6 +9,7 @@
         android:id="@+id/SellerCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:cardCornerRadius="7sp"
         app:cardUseCompatPadding="true">
 
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="155sp"
             android:gravity="center_vertical"
+            android:background="@color/white"
             android:id="@+id/sellerrow"
             android:padding="11sp">
 
@@ -38,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Shop_Name"
                     android:text="Shop Name"
+                    android:textColor="@color/black"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
                     android:textSize="22sp"
@@ -49,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Seller_Name"
                     android:text="Seller Name"
+                    android:textColor="@color/black"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
                     android:textSize="22sp"
@@ -60,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Seller_Number"
                     android:text="Number"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
@@ -71,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Shop_Type"
                     android:text="ShopType"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"

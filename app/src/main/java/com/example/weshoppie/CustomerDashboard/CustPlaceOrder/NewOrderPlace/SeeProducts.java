@@ -1,8 +1,9 @@
-package com.example.weshoppie.CustomerDashboard.CustPlaceOrder;
+package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeOrderPlaced.OrderPlaced;
+import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced.OrderPlaced;
 import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
 import com.example.weshoppie.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,11 +45,12 @@ import java.util.Objects;
 public class SeeProducts extends AppCompatActivity implements SelectCount{
 
     public static final String TAG = "See Products Activity";
+    SearchView searchView;
     boolean isProductListEmpty=true;
     int AmountInt;
     Intent fromAct;
     String ShopId, UserId, Number, Name, time, AmountStr;
-    String OrderID="empty";
+    String OrderID;
     TextView Shopname;
     Button Placeorder, CancelOrder;
     ArrayList<SelectProductModel> arrSelectProducts;
@@ -68,11 +70,27 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
 
         fromAct = getIntent();
         ShopId = fromAct.getStringExtra("OwnerId");
+        OrderID = fromAct.getStringExtra("BillNo");
         UserId = CurrentUser.getUid();
 
         Shopname = findViewById(R.id.Shopname);
         Placeorder = findViewById(R.id.place_order);
         CancelOrder = findViewById(R.id.cancel_order);
+        searchView = findViewById(R.id.searchViewCustSeeProducts);
+
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
 
         db.collection("Shopkeeper").document(ShopId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -98,6 +116,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                     return;
                 }
                 Intent intent = new Intent(SeeProducts.this, OrderPlaced.class);
+                intent.putExtra("BillNo", OrderID);
                 intent.putExtra("ShopId", ShopId);
                 intent.putExtra("Date", time);
                 startActivity(intent);
@@ -140,23 +159,29 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
         EventChangeListener();
     }
 
-    private void DeleteOrder() {
+    private void filterList(String newText) {
+        ArrayList<SelectProductModel> filteredList = new ArrayList<SelectProductModel>();
+        for (SelectProductModel item : arrSelectProducts){
+            if (item.getProduct_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Product exists", Toast.LENGTH_SHORT).show();
+        } else {
+            selectProductAdapter.setFilteredList(filteredList);
+        }
+    }
 
-        db.collection("Orders").whereEqualTo("Customer_ID",UserId)
-                .whereEqualTo("Shopkeeper_ID",ShopId)
-                .whereEqualTo("Status","Unpacked")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    private void DeleteOrder() {
+        db.collection("Orders").document(OrderID).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            if (!task.getResult().isEmpty()) {
-                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                    OrderID = documentSnapshot.getId();
-                                }
-                                db.collection("Orders").document(OrderID).delete();
-                            }
-                            startActivity(new Intent(SeeProducts.this, CustomerDashboardNew.class));
-                            finish();
+                            Toast.makeText(SeeProducts.this, "Order Deleted Successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SeeProducts.this, "Error...!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -194,7 +219,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
     @Override
     public void onQuantitySelected(SelectProductModel selectProductModel) {
         isProductListEmpty = false;
-        Map<String,Object> BasicOrderData = new HashMap<>();
+        /*Map<String,Object> BasicOrderData = new HashMap<>();
         BasicOrderData.put("Customer_ID",UserId);
         BasicOrderData.put("Shopkeeper_ID",ShopId);
         BasicOrderData.put("Customer_Number",Number);
@@ -203,6 +228,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
         BasicOrderData.put("Accepted",false);
         BasicOrderData.put("Time",time);
         BasicOrderData.put("Amount","0");
+        BasicOrderData.put("Delivered", false);*/
 
         Map<String,Object> ProductOrderData = new HashMap<>();
         ProductOrderData.put("Product_Name", selectProductModel.Product_Name);
@@ -213,9 +239,37 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
         ProductOrderData.put("Total_Cost",selectProductModel.getCoststr());
         ProductOrderData.put("Product_Status","Unpacked");
 
-        db.collection("Orders").whereEqualTo("Customer_ID",UserId)
+        db.collection("Orders").document(OrderID).collection("Added_Products")
+                .document(selectProductModel.documentID).set(ProductOrderData)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(SeeProducts.this, "ProductAdded", Toast.LENGTH_SHORT).show();
+                        db.collection("Orders").document(OrderID).get()
+                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        AmountInt = Integer.parseInt(task.getResult().get("Amount").toString());
+                                        AmountInt = AmountInt + Integer.parseInt(selectProductModel.getCoststr());
+                                        AmountStr = String.valueOf(AmountInt);
+
+                                        db.collection("Orders").document(OrderID)
+                                                .update("Amount",AmountStr);
+                                    }
+                                });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        /*db.collection("Orders").whereEqualTo("Customer_ID",UserId)
                 .whereEqualTo("Shopkeeper_ID",ShopId)
-                .whereEqualTo("Status","Unpacked")
+                .whereEqualTo("Accepted",false)
+                .whereEqualTo("Status", "Unpacked")
+                .whereEqualTo("Delivered", false)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -294,7 +348,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
     }
 
     @Override
@@ -341,5 +395,9 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
     @Override
     public void onCountToast() {
         Toast.makeText(SeeProducts.this, "Please select an appropriate count", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

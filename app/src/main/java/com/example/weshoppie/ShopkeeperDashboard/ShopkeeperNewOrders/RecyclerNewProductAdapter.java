@@ -23,6 +23,11 @@ public class RecyclerNewProductAdapter extends RecyclerView.Adapter<RecyclerNewP
     SelectNewOrder selectNewOrderListener;
     FirebaseFirestore db;
 
+    public void setFilteredList (ArrayList<NewOrderModel> filteredList){
+        this.arrNewOrderModel = filteredList;
+        notifyDataSetChanged();
+    }
+
     public RecyclerNewProductAdapter(Context context, ArrayList<NewOrderModel> arrNewOrderModel, SelectNewOrder selectNewOrderListener) {
         this.context = context;
         this.arrNewOrderModel = arrNewOrderModel;

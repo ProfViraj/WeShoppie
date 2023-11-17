@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="Profile Info"
+        android:textColor="@color/black"
         android:layout_margin="2sp"
         android:background="@color/peach"
         android:textSize="30sp"
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:gravity="center"
         android:visibility="gone"/>
@@ -55,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mobile Number"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:gravity="center"
             android:visibility="gone"/>
@@ -66,6 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address_1"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:gravity="center"
         android:visibility="gone"/>
@@ -75,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address_2"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:visibility="gone"
         android:gravity="center"/>
@@ -90,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="City"
+            android:textColor="@color/black"
             android:layout_marginEnd="20sp"
             android:visibility="gone"
             android:textSize="20sp" />
@@ -98,6 +104,7 @@
             android:id="@+id/dialog_pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Pincode"
             android:textSize="20sp"
             android:visibility="gone"/>

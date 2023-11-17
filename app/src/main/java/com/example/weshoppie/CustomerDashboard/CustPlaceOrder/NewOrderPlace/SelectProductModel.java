@@ -1,4 +1,4 @@
-package com.example.weshoppie.CustomerDashboard.CustPlaceOrder;
+package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace;
 
 public class SelectProductModel {
     String Product_Name, Product_Price, Product_Price_per, Brand, documentID, countstr, coststr;

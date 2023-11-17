@@ -1,4 +1,4 @@
-package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeOrderPlaced;
+package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced;
 
 public class OrderedProductModel {
     String Product_Name, Product_Price, Product_Price_Per, Brand, Count, Total_Cost;

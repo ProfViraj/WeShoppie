@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:cardCornerRadius="7sp"
         android:id="@+id/select_order"
         app:cardUseCompatPadding="true">
@@ -16,14 +17,24 @@
             android:layout_width="match_parent"
             android:layout_height="155sp"
             android:gravity="center_vertical"
+            android:background="@color/white"
             android:padding="11sp">
 
             <ImageView
+                android:id="@+id/card_image"
                 android:layout_width="70sp"
                 android:layout_height="70sp"
                 android:background="#34d1d1"
                 android:contentDescription="Order Image"
                 android:src="@drawable/baseline_shopping_cart_checkout_24"/>
+
+            <ImageView
+                android:id="@+id/delivery_done"
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:contentDescription="Order Image"
+                android:src="@drawable/checkmark"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,6 +49,7 @@
                     android:id="@+id/Shop_Name"
                     android:text="Shop Name"
                     android:paddingStart="5sp"
+                    android:textColor="@color/black"
                     android:layout_marginTop="3sp"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
@@ -48,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Order_id"
                     android:text="Bill No"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
@@ -59,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Order_date"
                     android:text="Date"
-                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
                     android:textStyle="bold"/>
@@ -70,7 +84,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Order_status"
                     android:text="Status"
-                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
                     android:paddingStart="5sp"
                     android:layout_marginTop="3sp"
                     android:textStyle="bold"/>

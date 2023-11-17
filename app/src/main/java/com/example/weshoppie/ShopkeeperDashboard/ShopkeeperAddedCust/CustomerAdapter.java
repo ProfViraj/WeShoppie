@@ -22,6 +22,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     ArrayList<CustShow> custShowArrayList;
     SelectCustomer selectCustomer;
 
+    public void setFilteredList(ArrayList<CustShow> filteredList){
+        this.custShowArrayList = filteredList;
+        notifyDataSetChanged();
+    }
+
     public CustomerAdapter(Context context, ArrayList<CustShow> custShowArrayList, SelectCustomer selectCustomer) {
         this.context = context;
         this.custShowArrayList = custShowArrayList;

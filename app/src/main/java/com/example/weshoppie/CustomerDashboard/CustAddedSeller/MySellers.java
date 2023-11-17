@@ -3,6 +3,7 @@ package com.example.weshoppie.CustomerDashboard.CustAddedSeller;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,9 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weshoppie.R;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.CustShow;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.CustomerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -35,12 +33,12 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.jar.Attributes;
 
 public class MySellers extends AppCompatActivity implements SelectSeller{
 
     public static final String TAG = "My Sellers Activity";
     FloatingActionButton seller_add;
+    SearchView searchView;
     String userID;
     RecyclerView recyclerView;
     ArrayList<SellerShow> sellerShowArrayList;
@@ -54,6 +52,20 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
         setContentView(R.layout.activity_my_sellers);
 
         seller_add = findViewById(R.id.seller_add);
+        searchView = findViewById(R.id.searchViewCustMySellers);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
         seller_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +85,20 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
         recyclerView.setAdapter(sellerAdapter);
 
         EventChangeListener();
+    }
+
+    private void filterList(String newText) {
+        ArrayList<SellerShow> filteredList = new ArrayList<SellerShow>();
+        for (SellerShow show : sellerShowArrayList){
+            if (show.getName().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(show);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Seller Added", Toast.LENGTH_SHORT).show();
+        } else {
+            sellerAdapter.setFilteredList(filteredList);
+        }
     }
 
     private void EventChangeListener() {

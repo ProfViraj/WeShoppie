@@ -11,14 +11,23 @@
     tools:context=".ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers">
 
     <TextView
+        android:layout_marginTop="20sp"
         android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="Added Customers"
-        android:layout_margin="2sp"
         android:background="@color/peach"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:gravity="center"
         android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewCust"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_linear"
+        app:queryHint="Search Here..."
+        app:iconifiedByDefault="false"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

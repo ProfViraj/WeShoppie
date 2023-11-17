@@ -7,29 +7,40 @@
     android:layout_margin="5sp"
     android:orientation="vertical"
     android:background="#98d6d6"
-    tools:context=".CustomerDashboard.CustPlaceOrder.SeeProducts">
+    tools:context=".CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeProducts">
 
     <TextView
         android:id="@+id/Shopname"
         android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="Shop Name"
-        android:layout_margin="2sp"
+        android:layout_marginTop="20sp"
+        android:textColor="@color/black"
         android:background="#34d1d1"
         android:textSize="30sp"
         android:gravity="center"
         android:textStyle="bold"/>
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewCustSeeProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_linear"
+        app:queryHint="Search Here..."
+        app:iconifiedByDefault="false"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Please select the count and then tick the checkbox"
+        android:textColor="@color/black"
         android:gravity="center"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Press the floating button after ordering"
+        android:textColor="@color/black"
         android:gravity="center"
         android:textStyle="bold"/>
 
@@ -53,7 +64,7 @@
 
         <Button
             android:id="@+id/cancel_order"
-            android:layout_width="180sp"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:text="Cancel Order"
@@ -63,7 +74,7 @@
 
         <Button
             android:id="@+id/place_order"
-            android:layout_width="180sp"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:text="Place Order"

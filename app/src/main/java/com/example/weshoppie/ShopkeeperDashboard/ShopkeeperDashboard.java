@@ -1,6 +1,7 @@
 package com.example.weshoppie.ShopkeeperDashboard;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -14,16 +15,17 @@ import android.widget.Toast;
 import com.example.weshoppie.R;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts.ProductManage;
-import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.ShopkeeperCartOrders;
+import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.DeliveredOrNot;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperNewOrders.ShopkeeperNewOrders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -38,27 +40,6 @@ public class ShopkeeperDashboard extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser CurrentUser =mAuth.getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        db.collection("Orders").whereEqualTo("Shopkeeper_ID", userid)
-                .whereEqualTo("Status","Unpacked")
-                .whereEqualTo("Accepted",true).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            if (!task.getResult().isEmpty()){
-                                NewOrderNotification.setVisibility(View.VISIBLE);
-                            } else {
-                                NewOrderNotification.setVisibility(View.GONE);
-                            }
-                        }
-                    }
-                });
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +79,7 @@ public class ShopkeeperDashboard extends AppCompatActivity {
         CartOrdersText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperCartOrders.class));
+                startActivity(new Intent(ShopkeeperDashboard.this, DeliveredOrNot.class));
             }
         });
         AddProduct.setOnClickListener(new View.OnClickListener() {
@@ -120,5 +101,26 @@ public class ShopkeeperDashboard extends AppCompatActivity {
                 startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperNewOrders.class));
             }
         });
+
+        db.collection("Orders").whereEqualTo("Shopkeeper_ID", userid)
+                .whereEqualTo("Status","Unpacked")
+                .whereEqualTo("Delivered", false)
+                .whereEqualTo("Accepted",true).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null){
+                            Toast.makeText(ShopkeeperDashboard.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        for (DocumentChange documentChange : value.getDocumentChanges()){
+                            if (documentChange.getType() == DocumentChange.Type.ADDED){
+                                NewOrderNotification.setVisibility(View.VISIBLE);
+                            }
+                            if (documentChange.getType() == DocumentChange.Type.REMOVED){
+                                NewOrderNotification.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+                });
     }
 }

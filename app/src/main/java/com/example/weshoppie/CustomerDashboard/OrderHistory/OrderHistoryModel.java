@@ -1,7 +1,15 @@
 package com.example.weshoppie.CustomerDashboard.OrderHistory;
 
 public class OrderHistoryModel {
-    String documentID, Status, Time, Shopkeeper_ID;
+    String documentID, Status, Time, Shopkeeper_ID, Shop_Name;
+
+    public String getShop_Name() {
+        return Shop_Name;
+    }
+
+    public void setShop_Name(String shop_Name) {
+        Shop_Name = shop_Name;
+    }
 
     public OrderHistoryModel() {
     }

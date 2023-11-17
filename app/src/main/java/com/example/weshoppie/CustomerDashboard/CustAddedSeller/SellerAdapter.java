@@ -21,6 +21,10 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.MyViewHold
     Context context;
     ArrayList<SellerShow> sellerShowArrayList;
     SelectSeller selectSeller;
+    public void setFilteredList (ArrayList<SellerShow> filteredList){
+        this.sellerShowArrayList = filteredList;
+        notifyDataSetChanged();
+    }
 
     public SellerAdapter(Context context, ArrayList<SellerShow> sellerShowArrayList, SelectSeller selectSeller) {
         this.context = context;

@@ -20,6 +20,11 @@ public class RegisteredShopsAdapter extends RecyclerView.Adapter<RegisteredShops
     ArrayList<RegisteredShopModel> registeredShopModelArrayList;
     SelectRegisterShop selectRegisterShop;
 
+    public void setFilteredList(ArrayList<RegisteredShopModel> filteredList){
+        this.registeredShopModelArrayList = filteredList;
+        notifyDataSetChanged();
+    }
+
     public RegisteredShopsAdapter(Context context, ArrayList<RegisteredShopModel> registeredShopModelArrayList, SelectRegisterShop selectRegisterShop) {
         this.context = context;
         this.registeredShopModelArrayList = registeredShopModelArrayList;

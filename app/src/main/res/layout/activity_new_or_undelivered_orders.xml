@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5sp"
+    android:background="#98d6d6"
+    android:orientation="vertical"
+    tools:context=".CustomerDashboard.CustPlaceOrder.NewOrUndeliveredOrders">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:text="Place Order"
+        android:layout_marginTop="20sp"
+        android:background="#34d1d1"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectuser"
+        android:textColor="@color/black"
+        android:text="Please select the order type"
+        android:layout_below="@+id/Weshoppie"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/shop_frame"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginStart="35sp"
+        android:layout_marginTop="25sp"
+        android:layout_marginEnd="35sp"
+        android:background="@drawable/edit_text_border">
+
+        <Button
+            android:id="@+id/new_orders_button"
+            android:layout_width="125sp"
+            android:layout_height="70sp"
+            android:layout_marginVertical="65sp"
+            android:layout_marginStart="10sp"
+            android:background="@drawable/regular_button"
+            android:text="New Order"
+            android:textColor="@color/black"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/image_customer"
+            android:layout_width="135sp"
+            android:layout_height="135sp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_add_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Undelivered_Frame"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginStart="35sp"
+        android:layout_marginTop="25sp"
+        android:layout_marginEnd="35sp"
+        android:background="@drawable/edit_text_border">
+
+        <Button
+            android:id="@+id/editable_undelivered_orders_button"
+            android:layout_width="125sp"
+            android:layout_height="70sp"
+            android:layout_marginVertical="65sp"
+            android:background="@drawable/regular_button"
+            android:layout_marginStart="10sp"
+            android:text="Edit Orders"
+            android:textColor="@color/black"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:layout_width="135sp"
+            android:layout_height="135sp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_edit_24" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -13,19 +13,40 @@
         android:theme="@style/Theme.WeShoppie"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.EditOrderPlaced.AddNewProduct.ProductAddInEdit"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.EditOrderPlaced.EditOrderFromBill"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.EditOrderPlaced.SeeEditableOrders"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustPlaceOrder.NewOrUndeliveredOrders"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDashboard.CustomOrders.CustomOrders"
+            android:exported="false" />
+        <activity
+            android:name=".ShopkeeperDashboard.ShopkeeperCartOrders.DeliveredOrders.DeliveredOrders"
+            android:exported="false" />
+        <activity
+            android:name=".ShopkeeperDashboard.ShopkeeperCartOrders.DeliveredOrNot"
+            android:exported="false" />
+        <activity
             android:name=".CustomerDashboard.CustAddedSeller.SameNumDiffSellers.SameNumDiffSellers"
             android:exported="false" />
         <activity
             android:name=".CustomerDashboard.CustAddedSeller.AddSeller"
             android:exported="false" />
         <activity
-            android:name=".ShopkeeperDashboard.ShopkeeperCartOrders.ShopkeeperCartOrders"
+            android:name=".ShopkeeperDashboard.ShopkeeperCartOrders.UndeliveredOrders.ShopkeeperCartOrders"
             android:exported="false" />
         <activity
             android:name=".CustomerDashboard.OrderHistory.SeeOrderDetails.SeeOrderDetails"
             android:exported="false" />
         <activity
-            android:name=".CustomerDashboard.CustPlaceOrder.SeeOrderPlaced.OrderPlaced"
+            android:name=".CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced.OrderPlaced"
             android:exported="false" />
         <activity
             android:name=".CustomerDashboard.OrderHistory.CustomerOrderHistory"
@@ -37,10 +58,10 @@
             android:name=".ShopkeeperDashboard.ShopkeeperNewOrders.ShopkeeperNewOrders"
             android:exported="false" />
         <activity
-            android:name=".CustomerDashboard.CustPlaceOrder.SeeProducts"
+            android:name=".CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeProducts"
             android:exported="false" />
         <activity
-            android:name=".CustomerDashboard.CustPlaceOrder.PlaceOrderSellerList"
+            android:name=".CustomerDashboard.CustPlaceOrder.NewOrderPlace.PlaceOrderSellerList"
             android:exported="false" />
         <activity
             android:name=".CustomerDashboard.CustAddedSeller.MySellers"
@@ -71,9 +92,6 @@
             android:exported="false" />
         <activity
             android:name=".login.LoginPage"
-            android:exported="false" />
-        <activity
-            android:name=".login.Logout"
             android:exported="false" />
         <activity
             android:name=".login.RegisterShopkeeper"

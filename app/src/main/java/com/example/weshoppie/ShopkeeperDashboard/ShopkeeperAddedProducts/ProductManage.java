@@ -2,6 +2,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 /** @noinspection ALL*/
 public class ProductManage extends AppCompatActivity {
     public static final String TAG = "Product Manage Activity";
+    SearchView searchView;
     String userid=FirebaseAuth.getInstance().getCurrentUser().getUid();
     String usermail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
     ArrayList<ProductModel> arrProducts;
@@ -44,6 +46,20 @@ public class ProductManage extends AppCompatActivity {
 
         fab_add = findViewById(R.id.fab_add);
         progressBar = findViewById(R.id.progress_circular);
+        searchView = findViewById(R.id.searchViewMyProducts);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerProduct);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -62,6 +78,20 @@ public class ProductManage extends AppCompatActivity {
                 startActivity(new Intent(ProductManage.this, ProductAdd.class));
             }
         });
+    }
+
+    private void filterList(String newText) {
+        ArrayList<ProductModel> filteredList = new ArrayList<ProductModel>();
+        for (ProductModel item : arrProducts){
+            if (item.getProduct_Name().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Product Added", Toast.LENGTH_SHORT).show();
+        } else {
+            adapter.setFilteredList(filteredList);
+        }
     }
 
     private void EventChangeListener() {

@@ -1,4 +1,4 @@
-package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeOrderPlaced;
+package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,18 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.SeeProducts;
-import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
 import com.example.weshoppie.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,9 +30,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class OrderPlaced extends AppCompatActivity {
@@ -65,34 +56,26 @@ public class OrderPlaced extends AppCompatActivity {
         ConfirmOrder = findViewById(R.id.confirm_order);
 
         fromAct = getIntent();
+        OrderID = fromAct.getStringExtra("BillNo");
         ShopID = fromAct.getStringExtra("ShopId");
         Date = fromAct.getStringExtra("Date");
 
         UserId = CurrentUser.getUid();
-        //Getting OrderID
-        db.collection("Orders").whereEqualTo("Customer_ID",UserId)
-                .whereEqualTo("Shopkeeper_ID",ShopID)
-                .whereEqualTo("Time", Date)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                OrderID = documentSnapshot.getId();
-                                Total = documentSnapshot.get("Amount").toString();
-                            }
-                            BillNo.setText("Bill No: " + OrderID);
-                            TotalCostBill.setText(Total + " Rs.");
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(OrderPlaced.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+        BillNo.setText("Bill No: " + OrderID);
         OrderDate.setText("Date : " + Date);
 
+        db.collection("Orders").document(OrderID).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    Total = task.getResult().get("Amount").toString();
+                                    TotalCostBill.setText(Total + " Rs.");
+                                }
+                            }
+                        });
+        //Getting and Setting Shop Name
         db.collection("Shopkeeper").document(ShopID).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -157,42 +140,23 @@ public class OrderPlaced extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
-        db.collection("Orders").whereEqualTo("Customer_ID",UserId)
-                .whereEqualTo("Shopkeeper_ID",ShopID)
-                .whereEqualTo("Time", Date)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Orders").document(OrderID).collection("Added_Products")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                OrderID = documentSnapshot.getId();
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null){
+                            Toast.makeText(OrderPlaced.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        for (DocumentChange documentChange : value.getDocumentChanges()){
+                            if (documentChange.getType() == DocumentChange.Type.ADDED){
+                                OrderedProductModel opm = documentChange.getDocument().toObject(OrderedProductModel.class);
+                                orderedProductModelArrayList.add(opm);
                             }
-                            db.collection("Orders").document(OrderID).collection("Added_Products")
-                                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                        @SuppressLint("NotifyDataSetChanged")
-                                        @Override
-                                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                            if (error != null){
-                                                Toast.makeText(OrderPlaced.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                                                return;
-                                            }
-                                            for (DocumentChange documentChange : value.getDocumentChanges()){
-                                                if (documentChange.getType() == DocumentChange.Type.ADDED){
-                                                    OrderedProductModel opm = documentChange.getDocument().toObject(OrderedProductModel.class);
-                                                    orderedProductModelArrayList.add(opm);
-                                                }
-                                                orderedProductAdapter.notifyDataSetChanged();
-                                            }
-                                        }
-                                    });
+                            orderedProductAdapter.notifyDataSetChanged();
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(OrderPlaced.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
                 });
-
     }
 }

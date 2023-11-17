@@ -13,22 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="Unpacked Products"
-        android:layout_margin="2sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20sp"
         android:background="@color/peach"
         android:textSize="30sp"
         android:textStyle="bold"
         android:gravity="center"/>
 
+    <androidx.appcompat.widget.SearchView
+        android:layout_below="@id/unpacked_text"
+        android:id="@+id/searchViewUnpackedProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_linear"
+        app:queryHint="Search Here..."
+        app:iconifiedByDefault="false"/>
+
     <ProgressBar
-        android:layout_below="@+id/unpacked_text"
+        android:layout_below="@+id/searchViewUnpackedProducts"
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"/>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <TextView
+        android:id="@+id/instruction_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/progress_circular"
+        android:text="Click on checkmark to update product status"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_below="@id/instruction_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">

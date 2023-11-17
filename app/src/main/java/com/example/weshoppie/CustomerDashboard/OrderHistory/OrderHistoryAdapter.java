@@ -26,6 +26,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     ArrayList<OrderHistoryModel> orderHistoryModelArrayList;
     SelectOrder selectOrder;
     FirebaseFirestore db;
+
+    public void setFilteredList(ArrayList<OrderHistoryModel> filteredList){
+        this.orderHistoryModelArrayList = filteredList;
+        notifyDataSetChanged();
+    }
     public OrderHistoryAdapter(Context context, ArrayList<OrderHistoryModel> orderHistoryModelArrayList, SelectOrder selectOrder) {
         this.context = context;
         this.orderHistoryModelArrayList = orderHistoryModelArrayList;
@@ -53,6 +58,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                         if (task.isSuccessful()){
                             DocumentSnapshot documentSnapshot = task.getResult();
                             holder.ShopName.setText(documentSnapshot.get("Shop_Name").toString());
+                            orderHistoryModel.setShop_Name(documentSnapshot.get("Shop_Name").toString());
                         } else {
                             Toast.makeText(context, "Shop Name not accessible", Toast.LENGTH_SHORT).show();
                         }

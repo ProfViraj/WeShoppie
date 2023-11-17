@@ -3,6 +3,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
 
     public static final String TAG = "Added Customers";
+    SearchView searchView;
     String userID;
     RecyclerView recyclerView;
     ArrayList<CustShow> custShowArrayList;
@@ -48,6 +50,20 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_added_customers);
 
+        searchView = findViewById(R.id.searchViewCust);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
         recyclerView = findViewById(R.id.recyclerCustomer);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,6 +75,20 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
         recyclerView.setAdapter(customerAdapter);
 
         EventChangeListener();
+    }
+
+    private void filterList(String newText) {
+        ArrayList<CustShow> filteredList = new ArrayList<CustShow>();
+        for (CustShow custShow : custShowArrayList){
+            if (custShow.getName().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(custShow);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "No such Customer added", Toast.LENGTH_SHORT).show();
+        } else {
+            customerAdapter.setFilteredList(filteredList);
+        }
     }
 
     private void EventChangeListener() {
