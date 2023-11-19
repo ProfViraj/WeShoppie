@@ -38,6 +38,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/recyclerAddNewProduct"/>
 
+        <Button
+            android:id="@+id/confirm_add_product_in_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="Confirm"
+            android:textColor="@color/black"
+            android:background="@drawable/regular_button"
+            android:textSize="20sp"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

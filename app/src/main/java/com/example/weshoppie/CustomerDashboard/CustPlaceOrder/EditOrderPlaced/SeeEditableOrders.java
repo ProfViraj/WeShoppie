@@ -1,5 +1,6 @@
 package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.EditOrderPlaced;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -14,9 +15,12 @@ import com.example.weshoppie.CustomerDashboard.OrderHistory.OrderHistoryAdapter;
 import com.example.weshoppie.CustomerDashboard.OrderHistory.OrderHistoryModel;
 import com.example.weshoppie.CustomerDashboard.OrderHistory.SelectOrder;
 import com.example.weshoppie.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -25,7 +29,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class SeeEditableOrders extends AppCompatActivity implements SelectOrder {
-    String UserID;
+    String UserID, ShopId;
+    Intent intent;
     SearchView searchView;
     RecyclerView recyclerView;
     ArrayList<OrderHistoryModel> orderHistoryModelArrayList;
@@ -81,8 +86,9 @@ public class SeeEditableOrders extends AppCompatActivity implements SelectOrder 
     @Override
     public void onItemSelected(OrderHistoryModel orderHistoryModel) {
         db.collection("Orders").document(orderHistoryModel.getDocumentID()).update("Accepted",false);
-        Intent intent = new Intent(SeeEditableOrders.this, EditOrderFromBill.class);
+        intent = new Intent(SeeEditableOrders.this, EditOrderFromBill.class);
         intent.putExtra("BillNo",orderHistoryModel.getDocumentID());
+        intent.putExtra("Shopkeeper_ID", orderHistoryModel.getShopkeeper_ID());
         startActivity(intent);
         finish();
     }

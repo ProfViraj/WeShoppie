@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
 import com.example.weshoppie.R;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedCust.AddedCustomers;
 import com.example.weshoppie.ShopkeeperDashboard.ShopkeeperAddedProducts.ProductManage;
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -35,7 +37,7 @@ public class ShopkeeperDashboard extends AppCompatActivity {
 
     static final String TAG = "Shopkeeper Dashboard Activity";
     TextView Welcome, AddProduct, ConnectedCust, NewOrdersText, CartOrdersText;
-    ImageView NewOrderNotification;
+    ImageView NewOrderNotification, ProfileUpdate;
     String userid, Name;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser CurrentUser =mAuth.getCurrentUser();
@@ -51,26 +53,23 @@ public class ShopkeeperDashboard extends AppCompatActivity {
         NewOrdersText = findViewById(R.id.new_Orders_text);
         CartOrdersText = findViewById(R.id.cart_orders_text);
         NewOrderNotification = findViewById(R.id.new_order_notification);
+        ProfileUpdate = findViewById(R.id.seller_profile_update);
 
         userid = CurrentUser.getUid();
 
         Welcome = findViewById(R.id.Welcome);
 
-        db.collection("Shopkeeper").whereEqualTo("Email", CurrentUser.getEmail()).get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
-                                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                        Name = Objects.requireNonNull(documentSnapshot.get("Owner_Name")).toString();
-                                    }
-                                    Welcome.setText("Welcome Back "+ Name ) ;
-                                } else {
-                                    Toast.makeText(ShopkeeperDashboard.this, "Network Error", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
+        db.collection("Shopkeeper").document(userid).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot ds = task.getResult();
+                            Welcome.setText("Welcome Back "+ ds.get("Owner_Name").toString() ) ;
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ShopkeeperDashboard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -99,6 +98,13 @@ public class ShopkeeperDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperNewOrders.class));
+            }
+        });
+
+        ProfileUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperProfileUpdate.class));
             }
         });
 

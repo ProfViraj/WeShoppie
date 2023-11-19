@@ -10,6 +10,7 @@
     tools:context=".CustomerDashboard.CustPlaceOrder.EditOrderPlaced.EditOrderFromBill">
 
     <TextView
+        android:id="@+id/bill_edit"
         android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="Bill No"

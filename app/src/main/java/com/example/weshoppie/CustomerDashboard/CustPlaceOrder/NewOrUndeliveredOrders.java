@@ -25,6 +25,7 @@ public class NewOrUndeliveredOrders extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(NewOrUndeliveredOrders.this, PlaceOrderSellerList.class));
+                finish();
             }
         });
 
@@ -32,6 +33,7 @@ public class NewOrUndeliveredOrders extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(NewOrUndeliveredOrders.this, SeeEditableOrders.class));
+                finish();
             }
         });
     }

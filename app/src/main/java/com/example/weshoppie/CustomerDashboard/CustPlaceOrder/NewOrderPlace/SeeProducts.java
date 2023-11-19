@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrUndeliveredOrders;
 import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced.OrderPlaced;
 import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
 import com.example.weshoppie.R;
@@ -180,6 +181,8 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(SeeProducts.this, "Order Deleted Successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SeeProducts.this, NewOrUndeliveredOrders.class));
+                            finish();
                         } else {
                             Toast.makeText(SeeProducts.this, "Error...!", Toast.LENGTH_SHORT).show();
                         }

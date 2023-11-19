@@ -13,15 +13,34 @@
         android:background="#FFEFD5"
         android:layout_margin="5sp">
 
-        <TextView
-            android:id="@+id/Weshoppie"
+        <RelativeLayout
+            android:id="@+id/Navigation"
             android:layout_width="match_parent"
             android:layout_height="70sp"
-            android:background="@color/peach"
-            android:textSize="45sp"
-            android:textColor="@color/white"
-            android:text="WeShoppie"
-            android:textAlignment="center"/>
+            android:gravity="center"
+            android:background="@color/peach">
+
+            <TextView
+                android:id="@+id/Weshoppie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="WeShoppie"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="45sp" />
+
+            <ImageView
+                android:id="@+id/seller_profile_update"
+                android:layout_width="40sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_person_24"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10sp"
+                android:layout_gravity="end"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/Welcome"
@@ -30,7 +49,7 @@
             android:text="Welcome"
             android:gravity="center"
             android:textColor="@color/black"
-            android:layout_below="@+id/Weshoppie"
+            android:layout_below="@+id/Navigation"
             android:textSize="20sp"/>
 
         <LinearLayout

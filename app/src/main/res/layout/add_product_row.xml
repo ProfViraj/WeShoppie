@@ -105,8 +105,8 @@
                         android:layout_width="35sp"
                         android:layout_height="30sp"
                         android:layout_marginTop="7sp"
-                        android:src="@drawable/baseline_add_24"
-                        android:background="@drawable/right_button"/>
+                        android:background="@drawable/right_button"
+                        android:src="@drawable/baseline_add_24" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -116,7 +116,7 @@
                 android:layout_width="60sp"
                 android:layout_height="60sp"
                 android:src="@drawable/baseline_add_24"
-                android:background="@drawable/border_linear"/>
+                android:background="@drawable/border_circle_blue"/>
 
         </LinearLayout>
 

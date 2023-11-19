@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.EditOrderPlaced.AddNewProduct.ProductAddInEdit;
@@ -38,12 +39,13 @@ import java.util.Map;
 
 public class EditOrderFromBill extends AppCompatActivity implements SelectEditOrder{
     SearchView searchView;
+    TextView BillEdit;
     Intent fromAct;
     static int Amount;
     RecyclerView recyclerView;
     FloatingActionButton actionButton;
     Button Cancel, Confirm;
-    String UserID, OrderID;
+    String UserID, OrderID, ShopID;
     ArrayList<EditOrderModel> editOrderModelArrayList;
     EditOrderAdapter editOrderAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -57,14 +59,18 @@ public class EditOrderFromBill extends AppCompatActivity implements SelectEditOr
         UserID = CurrentUser.getUid();
         fromAct = getIntent();
         OrderID = fromAct.getStringExtra("BillNo");
+        ShopID = fromAct.getStringExtra("Shopkeeper_ID");
         Amount=0;
 
         db = FirebaseFirestore.getInstance();
+        BillEdit = findViewById(R.id.bill_edit);
         searchView = findViewById(R.id.searchProduct);
         recyclerView = findViewById(R.id.recyclerOrderedProducts);
         actionButton = findViewById(R.id.product_add_float);
         Cancel = findViewById(R.id.cancel_button);
         Confirm = findViewById(R.id.confirm_button);
+
+        BillEdit.setText(OrderID);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,7 +83,10 @@ public class EditOrderFromBill extends AppCompatActivity implements SelectEditOr
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditOrderFromBill.this, ProductAddInEdit.class));
+                Intent productAddIntent = new Intent(EditOrderFromBill.this, ProductAddInEdit.class);
+                productAddIntent.putExtra("BillNo",OrderID);
+                productAddIntent.putExtra("Shopkeeper_ID",ShopID);
+                startActivity(productAddIntent);
             }
         });
 
