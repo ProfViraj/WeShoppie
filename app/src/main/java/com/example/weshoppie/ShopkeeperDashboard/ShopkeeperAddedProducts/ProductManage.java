@@ -48,6 +48,7 @@ public class ProductManage extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_circular);
         searchView = findViewById(R.id.searchViewMyProducts);
         searchView.clearFocus();
+        //Implementing search view *******************************************************************
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -60,7 +61,7 @@ public class ProductManage extends AppCompatActivity {
                 return false;
             }
         });
-
+        //Implementing Recycler view ******************************************************************
         recyclerView = findViewById(R.id.recyclerProduct);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -70,8 +71,7 @@ public class ProductManage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         EventChangeListener();
-
-
+        //Add Product button press *****************************************************************
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,7 @@ public class ProductManage extends AppCompatActivity {
             adapter.setFilteredList(filteredList);
         }
     }
-
+    //Realtime update for products ***********************************************************************************
     private void EventChangeListener() {
         progressBar.setVisibility(View.VISIBLE);
         db.collection("Products")

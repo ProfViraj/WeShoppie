@@ -35,7 +35,7 @@ public class DeliveredOrders extends AppCompatActivity implements SeeDeliveredOr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivered_orders);
-
+        //Implementing search view *******************************************************8
         searchView = findViewById(R.id.searchViewDeliveredOrders);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -50,7 +50,7 @@ public class DeliveredOrders extends AppCompatActivity implements SeeDeliveredOr
                 return false;
             }
         });
-
+        //Implementing Recycler view ****************************************************************************************
         recyclerView = findViewById(R.id.recyclerDeliveredOrderHistory);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -62,7 +62,7 @@ public class DeliveredOrders extends AppCompatActivity implements SeeDeliveredOr
 
         EventChangeListener();
     }
-
+    //Realtime Updates for delivered orders *****************************************************************************
     private void EventChangeListener() {
         db.collection("Orders").whereEqualTo("Shopkeeper_ID", UserID)
                 .whereEqualTo("Accepted", true).whereEqualTo("Delivered", true)
@@ -84,7 +84,7 @@ public class DeliveredOrders extends AppCompatActivity implements SeeDeliveredOr
                     }
                 });
     }
-
+    //Filtering the list as per search ********************************************************************************
     private void filterList(String newText) {
         ArrayList<DeliveredOrdersModel> filteredList = new ArrayList<DeliveredOrdersModel>();
         for (DeliveredOrdersModel item : deliveredOrdersModelArrayList){
@@ -98,7 +98,7 @@ public class DeliveredOrders extends AppCompatActivity implements SeeDeliveredOr
             deliveredOrdersAdapter.setFilteredList(filteredList);
         }
     }
-
+    //On order selected ***************************************************************************************
     @Override
     public void onOrderSelected(DeliveredOrdersModel deliveredOrdersModel) {
         Intent intent = new Intent(DeliveredOrders.this, SeeOrderDetails.class);

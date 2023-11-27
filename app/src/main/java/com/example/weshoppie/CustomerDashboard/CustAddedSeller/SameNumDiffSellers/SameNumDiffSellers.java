@@ -47,7 +47,7 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
 
         fromAct = getIntent();
         SellerNumber = fromAct.getStringExtra("SellerNumber");
-
+        //Search View Implementation ****************************************************************
         searchView = findViewById(R.id.searchViewRegisteredShops);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -62,7 +62,7 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
                 return false;
             }
         });
-
+    //Recycler View Implementation **************************************************************************************************************
         recyclerView = findViewById(R.id.recyclerRegisteredShops);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,7 +72,7 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
         registeredShopModelArrayList = new ArrayList<RegisteredShopModel>();
         registeredShopsAdapter = new RegisteredShopsAdapter(SameNumDiffSellers.this, registeredShopModelArrayList, this);
         recyclerView.setAdapter(registeredShopsAdapter);
-
+        //Getting Customer Name and Mobile Number for further use ********************************************************************************
         db.collection("Customer").document(UserId).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -89,9 +89,8 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
                     }
                 });
         EventChangeListener();
-
     }
-
+    //Filtered list for search ************************************************************************
     private void filterList(String newText) {
         ArrayList<RegisteredShopModel> filteredList = new ArrayList<RegisteredShopModel>();
         for (RegisteredShopModel item : registeredShopModelArrayList){
@@ -110,6 +109,7 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
     }
 
     private void EventChangeListener() {
+        //Getting realtime updates of the shops with same registered number **************************************************
         db.collection("Shopkeeper").whereEqualTo("Owner_Phone",SellerNumber)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -130,27 +130,27 @@ public class SameNumDiffSellers extends AppCompatActivity implements SelectRegis
                     }
                 });
     }
-
+    //On selecting the shop ********************************************************************************************
     @Override
     public void onItemClicked(RegisteredShopModel registeredShopModel) {
-
-
+        //Map for My_Added_Customers ************************************************************************************
         Map<String, Object> mycustomer = new HashMap<>();
         mycustomer.put("Name",Name);
         mycustomer.put("Mobile_Number",Mobile_Number);
-
+        //Map for My_Added_Sellers ****************************************************************************************
         Map<String, Object> myseller = new HashMap<>();
         myseller.put("Name",registeredShopModel.Owner_Name);
         myseller.put("Phone",registeredShopModel.Owner_Phone);
         myseller.put("Shop_Name",registeredShopModel.Shop_Name);
         myseller.put("Shop_Type",registeredShopModel.Shop_Type);
-
+        //Adding Data to Customer for Added_Sellers ************************************************************************
         db.collection("Customer").document(UserId)
                 .collection("My_Sellers").document(registeredShopModel.getDocumentID()).set(myseller)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+                            //Adding Data to Seller for Added_Customers ********************************************************************
                             db.collection("Shopkeeper").document(registeredShopModel.DocumentID)
                                     .collection("Added_Customers").document(UserId).set(mycustomer)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {

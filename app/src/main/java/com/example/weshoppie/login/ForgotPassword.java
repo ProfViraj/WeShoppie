@@ -34,7 +34,7 @@ public class ForgotPassword extends AppCompatActivity {
         Reset = findViewById(R.id.reset);
         goback = findViewById(R.id.go_back);
         mAuth = FirebaseAuth.getInstance();
-
+        //Go Back to login page ********************************************************************
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +42,7 @@ public class ForgotPassword extends AppCompatActivity {
                 finish();
             }
         });
-
+        //Reset Password **********************************************************************************************************
         Reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

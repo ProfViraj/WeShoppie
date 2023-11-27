@@ -52,7 +52,7 @@ public class ProductAdd extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductAdd.this, android.R.layout.simple_spinner_item, PricePer);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         product_price_per.setAdapter(adapter);
-
+        //Spinner for the product price per **********************************************************************************************8
         product_price_per.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -65,7 +65,7 @@ public class ProductAdd extends AppCompatActivity {
                 return;
             }
         });
-
+        //Add product **************************************************************************************************
         action_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +74,7 @@ public class ProductAdd extends AppCompatActivity {
                 ProductPrice = product_price.getText().toString();
                 ProductPricePer = product_price_per.getSelectedItem().toString();
                 ProductCompany = product_company.getText().toString();
-
+                //Checking if the fields are empty **************************************************************************
                 if(TextUtils.isEmpty(ProductName)){
                     Toast.makeText(ProductAdd.this, "Enter the Product's Name", Toast.LENGTH_SHORT).show();
                     return;
@@ -93,16 +93,13 @@ public class ProductAdd extends AppCompatActivity {
                 String finalProductCompany = ProductCompany;
                 userid = CurrentUser.getUid();
 
-                //Map<String,Object> ProductNameMap = new HashMap<>();
-                //ProductNameMap.put("Product Name",ProductName);
-
                 Map<String,Object> products = new HashMap<>();
                 products.put("Shopkeeper_id",userid);
                 products.put("Product_Name",ProductName);
                 products.put("Product_Price",ProductPrice+" Rs.");
                 products.put("Product_Price_per",ProductPricePer);
                 products.put("Brand",ProductCompany);
-
+                //Check if the product Exists *******************************************************************************************
                 db.collection("Products").whereEqualTo("Brand",ProductCompany)
                         .whereEqualTo("Product_Name",ProductName)
                         .whereEqualTo("Shopkeeper_id",userid)
@@ -111,6 +108,7 @@ public class ProductAdd extends AppCompatActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
                                     if (task.getResult().isEmpty()){
+                                        //When Product is not present **********************************************************************************8
                                         db.collection("Products").add(products).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -127,6 +125,7 @@ public class ProductAdd extends AppCompatActivity {
                                             }
                                         });
                                     } else {
+                                        //When product exists (Update) ******************************************************************************
                                         String ProductId = "";
                                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
                                             ProductId = documentSnapshot.getId();

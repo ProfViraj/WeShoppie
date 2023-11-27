@@ -47,11 +47,11 @@ public class CustomerProfileUpdate extends AppCompatActivity {
 
         userid = CurrentUser.getUid();
         usermail = CurrentUser.getEmail();
-
+        //Get the previously stored data ********************************************************************
         getData();
 
         Update_Profile = findViewById(R.id.Cust_Profile_Update);
-
+        //Update Profile Button *****************************************************************************
         Update_Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class CustomerProfileUpdate extends AppCompatActivity {
                 Cust_city = cust_city.getText().toString();
                 Cust_pincode = pincode.getText().toString();
                 Cust_state = state.getText().toString();
-
+                //Checking if the fields are empty *************************************************************************************
                 if(TextUtils.isEmpty(Cust_name)){
                     Toast.makeText(CustomerProfileUpdate.this, "Enter the Name", Toast.LENGTH_SHORT).show();
                     return;
@@ -92,7 +92,7 @@ public class CustomerProfileUpdate extends AppCompatActivity {
                     Toast.makeText(CustomerProfileUpdate.this, "Enter the State", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //Adding data to HashMap *************************************************************************************
                 Map<String,Object> userdata = new HashMap<>();
                 userdata.put("Name",Cust_name);
                 userdata.put("Mobile_Number",Cust_phone);
@@ -102,7 +102,7 @@ public class CustomerProfileUpdate extends AppCompatActivity {
                 userdata.put("Pincode",Cust_pincode);
                 userdata.put("State",Cust_state);
                 userdata.put("Email",usermail);
-
+                //Updating the data ********************************************************************************************************
                 db.collection("Customer").document(userid).set(userdata)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

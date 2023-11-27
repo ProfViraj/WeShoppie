@@ -58,7 +58,7 @@ public class ShopkeeperDashboard extends AppCompatActivity {
         userid = CurrentUser.getUid();
 
         Welcome = findViewById(R.id.Welcome);
-
+        //Getting the seller's name ***************************************************************************
         db.collection("Shopkeeper").document(userid).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @SuppressLint("SetTextI18n")
@@ -87,7 +87,6 @@ public class ShopkeeperDashboard extends AppCompatActivity {
                 startActivity(new Intent(ShopkeeperDashboard.this, ProductManage.class));
             }
         });
-
         ConnectedCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,14 +99,13 @@ public class ShopkeeperDashboard extends AppCompatActivity {
                 startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperNewOrders.class));
             }
         });
-
         ProfileUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ShopkeeperDashboard.this, ShopkeeperProfileUpdate.class));
             }
         });
-
+        //Realtime update for the new orders ***********************************************************************
         db.collection("Orders").whereEqualTo("Shopkeeper_ID", userid)
                 .whereEqualTo("Status","Unpacked")
                 .whereEqualTo("Delivered", false)

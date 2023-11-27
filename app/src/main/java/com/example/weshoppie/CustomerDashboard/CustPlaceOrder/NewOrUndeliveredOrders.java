@@ -20,7 +20,7 @@ public class NewOrUndeliveredOrders extends AppCompatActivity {
 
         NewOrders = findViewById(R.id.new_orders_button);
         EditOrders = findViewById(R.id.editable_undelivered_orders_button);
-
+        //New Order Button *********************************************************************************************8
         NewOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +28,7 @@ public class NewOrUndeliveredOrders extends AppCompatActivity {
                 finish();
             }
         });
-
+        //Edit Order Button *************************************************************************************************
         EditOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,5 +1,6 @@
 package com.example.weshoppie.CustomerDashboard.CustPlaceOrder.EditOrderPlaced.AddNewProduct;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,22 +20,22 @@ public class ProductAddInAdapter extends RecyclerView.Adapter<ProductAddInAdapte
     Context context;
     ArrayList<ProductAddInModel> productAddInModelArrayList;
     SelectProductAddIN selectProductAddIN;
-
+    //Constructor *********************************************************************************************************************************
     public ProductAddInAdapter(Context context, ArrayList<ProductAddInModel> productAddInModelArrayList, SelectProductAddIN selectProductAddIN) {
         this.context = context;
         this.productAddInModelArrayList = productAddInModelArrayList;
         this.selectProductAddIN = selectProductAddIN;
     }
-
+    //Creating the view **********************************************************************************************************************
     @NonNull
     @Override
     public ProductAddInAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.add_product_row,parent,false);
         return new ViewHolder(v);
     }
-
+    //Binding the data to the view **************************************************************************8
     @Override
-    public void onBindViewHolder(@NonNull ProductAddInAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductAddInAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ProductAddInModel productAddInModel = productAddInModelArrayList.get(position);
         int[] count = {0};
 
@@ -46,7 +47,7 @@ public class ProductAddInAdapter extends RecyclerView.Adapter<ProductAddInAdapte
         holder.Per.setText(productAddInModel.Product_Price_per);
         holder.Brand.setText(productAddInModel.Brand);
         holder.Count.setText(productAddInModel.getCount());
-
+        //Increasing the count *****************************************************
         holder.Increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +57,7 @@ public class ProductAddInAdapter extends RecyclerView.Adapter<ProductAddInAdapte
                 holder.Count.setText(productAddInModel.getCount());
             }
         });
+        //Decreasing the count ****************************************************************
         holder.Decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +70,7 @@ public class ProductAddInAdapter extends RecyclerView.Adapter<ProductAddInAdapte
                 }
             }
         });
+        //Confirming the addition **************************************************************
         holder.AddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +88,7 @@ public class ProductAddInAdapter extends RecyclerView.Adapter<ProductAddInAdapte
     public int getItemCount() {
         return productAddInModelArrayList.size();
     }
-
+    //Getting the ID *******************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ProductName, Price, Per, Brand, Count;
         ImageView Increase, Decrease, AddNew;

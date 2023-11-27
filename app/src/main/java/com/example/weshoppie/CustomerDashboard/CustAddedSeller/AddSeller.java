@@ -35,25 +35,28 @@ public class AddSeller extends AppCompatActivity {
         Seller_Num = findViewById(R.id.seller_num);
         Confirm_Seller_Num = findViewById(R.id.confirm_seller_num);
         UserId = CurrentUser.getUid();
-
+        //Confirm Seller Number Button **************************************************************************************
         Confirm_Seller_Num.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String SellerNumber;
                 SellerNumber = Seller_Num.getText().toString();
+                //Checking if the field is empty *****************************************************************************
                 if(TextUtils.isEmpty(SellerNumber)){
                     Toast.makeText(AddSeller.this, "Enter Seller's Phone Number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //Checking if the Shopkeeper is Registered ********************************************************************************8
                 db.collection("Shopkeeper").whereEqualTo("Owner_Phone",SellerNumber)
                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
                                     if (task.getResult().isEmpty()){
+                                        //If no such Shopkeeper exists ********************************************************************
                                         Toast.makeText(AddSeller.this, "No such Seller Exists", Toast.LENGTH_SHORT).show();
                                     } else {
+                                        //If shopkeeper exists then Go to see different shops added on the same number *****************************
                                         Intent intent = new Intent(AddSeller.this, SameNumDiffSellers.class);
                                         intent.putExtra("SellerNumber", SellerNumber);
                                         startActivity(intent);

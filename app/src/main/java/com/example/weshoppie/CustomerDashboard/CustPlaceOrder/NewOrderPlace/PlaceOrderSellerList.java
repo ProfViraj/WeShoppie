@@ -127,7 +127,7 @@ public class PlaceOrderSellerList extends AppCompatActivity implements SelectSel
             sellerAdapter.setFilteredList(filteredList);
         }
     }
-
+    //Realtime update for added sellers ***********************************************************************************************************
     private void EventChangeListener() {
         db.collection("Customer").document(userID).collection("My_Sellers").orderBy("Name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -149,7 +149,7 @@ public class PlaceOrderSellerList extends AppCompatActivity implements SelectSel
                     }
                 });
     }
-
+    //On seller selected *************************************************************************************
     @Override
     public void onItemClicked(SellerShow sellerShow) {
 
@@ -163,7 +163,9 @@ public class PlaceOrderSellerList extends AppCompatActivity implements SelectSel
         BasicOrderData.put("Time",time);
         BasicOrderData.put("Amount","0");
         BasicOrderData.put("Delivered", false);
-
+        BasicOrderData.put("Cancellation",false);
+        BasicOrderData.put("Expected_Time","Null");
+        //Check if the order is placed or in process ********************************************************************************
         db.collection("Orders")
                 .whereEqualTo("Shopkeeper_ID", sellerShow.getDocumentID())
                 .whereEqualTo("Customer_ID", userID)
@@ -175,6 +177,7 @@ public class PlaceOrderSellerList extends AppCompatActivity implements SelectSel
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             if (task.getResult().isEmpty()){
+                                //Creating new order **************************************************************************************
                                 db.collection("Orders").add(BasicOrderData)
                                         .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                             @Override
@@ -195,6 +198,7 @@ public class PlaceOrderSellerList extends AppCompatActivity implements SelectSel
                                             }
                                         });
                             } else {
+                                //If order is already placed ************************************************************************************
                                 Toast.makeText(PlaceOrderSellerList.this, "Order is already Placed. Redirecting...", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(PlaceOrderSellerList.this, SeeEditableOrders.class));
                                 finish();

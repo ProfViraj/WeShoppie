@@ -26,24 +26,25 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
     Context context;
     ArrayList<ProductModel> arrProducts;
     FirebaseFirestore db;
-
+    //Filtering the list for search view **********************************************************************************
     public void setFilteredList (ArrayList<ProductModel> filteredList){
         this.arrProducts = filteredList;
         notifyDataSetChanged();
     }
+    //Constructor ***************************************************************************************
     public RecyclerProductAdapter(Context context, ArrayList<ProductModel> arrProducts){
         this.context = context;
         this.arrProducts = arrProducts;
         db = FirebaseFirestore.getInstance();
     }
-
+    //Creating view for view holder ******************************************************************************************************
     @NonNull
     @Override
     public RecyclerProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.product_row,parent,false);
         return new ViewHolder(v);
     }
-
+    //Binding data to the view ***********************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull RecyclerProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ProductModel productModel = arrProducts.get(position);
@@ -51,7 +52,7 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
         holder.Pprice.setText(productModel.Product_Price);
         holder.Per.setText(productModel.Product_Price_per);
         holder.Brand.setText(productModel.Brand);
-
+        //On deleting product *********************************************************************************************
         holder.delproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +93,7 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
     public int getItemCount() {
         return arrProducts.size();
     }
-
+    //Getting IDs *******************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView Pname, Pprice, Per, Brand;
         LinearLayout llRow;

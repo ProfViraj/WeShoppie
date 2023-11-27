@@ -2,7 +2,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperNewOrders;
 
 public class NewOrderModel {
     String Customer_Name, Customer_Number, Status, Customer_ID, Shopkeeper_ID, documentID;
-
+    //Constructors ************************************************************************************************
     public NewOrderModel() {
     }
 
@@ -13,7 +13,7 @@ public class NewOrderModel {
         Customer_ID = customer_ID;
         Shopkeeper_ID = shopkeeper_ID;
     }
-
+    //Getter and Setter methods ****************************************************************************************************
     public String getCustomer_Name() {
         return Customer_Name;
     }

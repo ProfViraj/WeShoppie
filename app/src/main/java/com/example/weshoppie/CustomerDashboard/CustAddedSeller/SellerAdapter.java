@@ -21,6 +21,7 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.MyViewHold
     Context context;
     ArrayList<SellerShow> sellerShowArrayList;
     SelectSeller selectSeller;
+    //Showing filtered list for search view ****************************************************************************
     public void setFilteredList (ArrayList<SellerShow> filteredList){
         this.sellerShowArrayList = filteredList;
         notifyDataSetChanged();
@@ -31,14 +32,14 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.MyViewHold
         this.sellerShowArrayList = sellerShowArrayList;
         this.selectSeller = selectSeller;
     }
-
+    //Creating view for recycler vew *******************************************************************************
     @NonNull
     @Override
     public SellerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.seller_list_row, parent, false);
         return new SellerAdapter.MyViewHolder(v);
     }
-
+    //On binding the data to view holder ************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull SellerAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         SellerShow Seller = sellerShowArrayList.get(position);
@@ -59,7 +60,7 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.MyViewHold
     public int getItemCount() {
         return sellerShowArrayList.size();
     }
-
+    //Getting the IDs of the xml file ****************************************************8
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Seller_Name, Seller_Number, Shop_Type, Shop_Name;
         CardView sellerCard;

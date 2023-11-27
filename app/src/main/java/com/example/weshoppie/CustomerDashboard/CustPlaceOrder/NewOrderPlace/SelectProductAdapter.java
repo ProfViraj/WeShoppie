@@ -25,7 +25,7 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
         this.selectedProductList = filteredList;
         notifyDataSetChanged();
     }
-
+    //Constructor ***************************************************************************************************************
     public SelectProductAdapter(Context context, ArrayList<SelectProductModel> selectProductModels, SelectCount selectCount) {
         this.context = context;
         this.selectProductModels = selectProductModels;
@@ -35,14 +35,14 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
     public View getV() {
         return v;
     }
-
+    //Creating the view for view holder *************************************************************************************
     @NonNull
     @Override
     public SelectProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         v = LayoutInflater.from(context).inflate(R.layout.select_products,parent,false);
         return new ViewHolder(v);
     }
-
+    //Binding the data to the view ***********************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull SelectProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         boolean ifadd=false;
@@ -52,7 +52,7 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
         holder.Pprice.setText(selectProductModel.Product_Price);
         holder.Per.setText(selectProductModel.Product_Price_per);
         holder.Brand.setText(selectProductModel.Brand);
-
+        //Increasing the Product Count **************************************************************************************
         holder.Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +61,7 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
                 selectProductModel.setCount(cnt[0]);
             }
         });
+        //Decreasing the product Count ****************************************************************************************
         holder.Subtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +74,7 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
                 selectProductModel.setCount(cnt[0]);
             }
         });
-
+        //Add the product ****************************************************************************************8
         holder.AddIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +102,7 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
     public int getItemCount() {
         return selectProductModels.size();
     }
-
+    //Getting the ID ************************************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView Pname, Pprice, Per, Brand, Count;
         ImageView Subtract, Add, AddIn, Added;

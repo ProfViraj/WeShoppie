@@ -2,15 +2,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.Undeliver
 
 public class ShopkeeperOrderModel {
     String documentID, Status, Time, Customer_ID, Cust_Name;
-
-    public String getCust_Name() {
-        return Cust_Name;
-    }
-
-    public void setCust_Name(String cust_Name) {
-        Cust_Name = cust_Name;
-    }
-
+    //Constructor ***********************************************************************************
     public ShopkeeperOrderModel() {
     }
 
@@ -18,7 +10,14 @@ public class ShopkeeperOrderModel {
         Status = status;
         Time = time;
     }
+    //Getter and Setter Methods ************************************************************************
+    public String getCust_Name() {
+        return Cust_Name;
+    }
 
+    public void setCust_Name(String cust_Name) {
+        Cust_Name = cust_Name;
+    }
     public String getDocumentID() {
         return documentID;
     }

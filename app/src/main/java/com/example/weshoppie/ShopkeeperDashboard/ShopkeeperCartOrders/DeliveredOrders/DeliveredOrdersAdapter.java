@@ -27,31 +27,33 @@ public class DeliveredOrdersAdapter extends RecyclerView.Adapter<DeliveredOrders
     ArrayList<DeliveredOrdersModel> deliveredOrdersModelArrayList;
     SeeDeliveredOrders seeDeliveredOrders;
     FirebaseFirestore db;
+    //Filtered List *************************************************************************************
     public void setFilteredList (ArrayList<DeliveredOrdersModel> filteredList){
         this.deliveredOrdersModelArrayList = filteredList;
         notifyDataSetChanged();
     }
+    //Constructor *************************************************************************************************************
     public DeliveredOrdersAdapter(Context context, ArrayList<DeliveredOrdersModel> deliveredOrdersModelArrayList, SeeDeliveredOrders seeDeliveredOrders) {
         this.context = context;
         this.deliveredOrdersModelArrayList = deliveredOrdersModelArrayList;
         this.seeDeliveredOrders = seeDeliveredOrders;
         db = FirebaseFirestore.getInstance();
     }
-
+    //Creating view for view holder **************************************************************************
     @NonNull
     @Override
     public DeliveredOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.order_history_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //Binding data to the view *****************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull DeliveredOrdersAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         DeliveredOrdersModel deliveredOrdersModel = deliveredOrdersModelArrayList.get(position);
         holder.Status.setText(deliveredOrdersModel.Status);
         holder.BillNo.setText(deliveredOrdersModel.getDocumentID());
         holder.Date.setText(deliveredOrdersModel.Time);
-
+        //Getting the customer name ***********************************************************************************8
         db.collection("Customer").document(deliveredOrdersModel.Customer_ID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -70,7 +72,7 @@ public class DeliveredOrdersAdapter extends RecyclerView.Adapter<DeliveredOrders
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        //Selecting the order ************************************************************************************
         holder.SelectOrderCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +85,7 @@ public class DeliveredOrdersAdapter extends RecyclerView.Adapter<DeliveredOrders
     public int getItemCount() {
         return deliveredOrdersModelArrayList.size();
     }
-
+    //Getting IDs *****************************************************************************************88
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView CustomerName, BillNo, Date, Status;
         CardView SelectOrderCard;

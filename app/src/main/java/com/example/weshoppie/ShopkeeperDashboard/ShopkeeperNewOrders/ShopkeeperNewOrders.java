@@ -38,7 +38,7 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper_new_orders);
-
+        //Implementing search view **************************************************************************
         searchView = findViewById(R.id.searchViewNewOrders);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -53,7 +53,7 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
                 return false;
             }
         });
-
+        //Implementing recycler view ****************************************************************************************************
         recyclerNewOrder = findViewById(R.id.recyclerNewOrder);
         recyclerNewOrder.setHasFixedSize(true);
         recyclerNewOrder.setLayoutManager(new LinearLayoutManager(this));
@@ -80,10 +80,10 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
             recyclerNewProductAdapter.setFilteredList(filteredList);
         }
     }
-
+    //Realtime updates for new orders ***********************************************************************************************************
     private void EventChangeListener() {
         db.collection("Orders").whereEqualTo("Shopkeeper_ID",userID).whereEqualTo("Status","Unpacked")
-                .whereEqualTo("Accepted", true).whereEqualTo("Delivered", false)
+                .whereEqualTo("Accepted", true).whereEqualTo("Delivered", false).whereEqualTo("Cancellation",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
@@ -103,7 +103,7 @@ public class ShopkeeperNewOrders extends AppCompatActivity implements SelectNewO
                     }
                 });
     }
-
+    //On order selected ***********************************************************************************
     @Override
     public void onItemClicked(NewOrderModel newOrderModel) {
         String orderID = newOrderModel.getDocumentID();

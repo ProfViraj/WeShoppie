@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class UnpackedProductsModel {
     String Brand, Product_Name, Product_Price, Product_Price_Per, Product_Status, documentID, Count, Total_Cost;
-
+    //Constructor ************************************************************************************************
     public UnpackedProductsModel() {
     }
 
@@ -17,6 +17,7 @@ public class UnpackedProductsModel {
         Product_Status = product_Status;
         Total_Cost = total_Cost;
     }
+    //Getter and Setter Methods **************************************************************************************************
     public String getBrand() {
         return Brand;
     }

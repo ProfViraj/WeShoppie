@@ -50,7 +50,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
 
         fromAct = getIntent();
         OrderID = fromAct.getStringExtra("OrderID");
-
+        //implementing search view *******************************************************************
         searchView = findViewById(R.id.searchViewUnpackedProducts);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -65,11 +65,12 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
                 return false;
             }
         });
-
+        //On packing done ****************************************************************************
         PackingDone = findViewById(R.id.packing_done);
         PackingDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Check if all the packing is complete *************************************************************
                 db.collection("Orders").document(OrderID)
                         .collection("Added_Products")
                         .whereEqualTo("Product_Status","Unpacked")
@@ -90,7 +91,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
                 finish();
             }
         });
-
+        //Implementing recycler view **************************************************************************************************
         recyclerUnpackedProduct = findViewById(R.id.recyclerUnpackedProducts);
         recyclerUnpackedProduct.setHasFixedSize(true);
         recyclerUnpackedProduct.setLayoutManager(new LinearLayoutManager(this));
@@ -102,7 +103,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
 
         CheckIfAllPacked();
     }
-
+    //Filtering the search list ***************************************************************
     private void filterList(String newText) {
         ArrayList<UnpackedProductsModel> filteredList = new ArrayList<UnpackedProductsModel>();
         for (UnpackedProductsModel item : unpackedProductsModelArrayList){
@@ -116,7 +117,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
             unpackedProductAdapter.setFilteredList(filteredList);
         }
     }
-
+    //Check if all packed *************************************************************************
     private void CheckIfAllPacked() {
 
         db.collection("Orders").document(OrderID).collection("Added_Products")
@@ -126,6 +127,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             if (task.getResult().isEmpty()){
+                                //If all packed ***************************************************************************************************
                                 db.collection("Orders").document(OrderID).update("Status","Packed").addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -155,7 +157,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
     }
 
     private void EventChangeListener() {
-
+        //Realtime updates for Unpacked products ************************************************************************************
         db.collection("Orders").document(OrderID).collection("Added_Products")
                 .whereEqualTo("Product_Status","Unpacked").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -176,7 +178,7 @@ public class SeeUnpackedProducts extends AppCompatActivity implements SelectUnpa
         });
 
     }
-
+    //On packing the item *************************************************************************************************
     @Override
     public void onItemClicked(UnpackedProductsModel unpackedProductsModel) {
         Map<String,Object> ProductStatus = new HashMap<>();

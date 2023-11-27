@@ -55,6 +55,7 @@ public class SeeOrderDetails extends AppCompatActivity {
 
         BillNumber.setText("Bill No: "+BillNo);
         DateText.setText("Date: "+Date);
+        //Getting the shop name ******************************************************************
         if (ShopID != null){
             db.collection("Shopkeeper").document(ShopID).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -86,7 +87,7 @@ public class SeeOrderDetails extends AppCompatActivity {
                         }
                     });
         }
-
+        //Get total amount ***************************************************************************************************************8
         UserId = CurrentUser.getUid();
         db.collection("Orders").document(BillNo).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -104,7 +105,7 @@ public class SeeOrderDetails extends AppCompatActivity {
                         Toast.makeText(SeeOrderDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        //Implementing recycler view ************************************************************************88
         recyclerView = findViewById(R.id.order_details_see_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderSeeModelArrayList = new ArrayList<OrderSeeModel>();
@@ -115,6 +116,7 @@ public class SeeOrderDetails extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
+        //Realtime update for products in the order ***********************************************************************
         db.collection("Orders").document(BillNo).collection("Added_Products")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")

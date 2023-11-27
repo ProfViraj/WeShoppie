@@ -31,26 +31,28 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         this.orderHistoryModelArrayList = filteredList;
         notifyDataSetChanged();
     }
+    //Constructor ********************************************************************************************************************
     public OrderHistoryAdapter(Context context, ArrayList<OrderHistoryModel> orderHistoryModelArrayList, SelectOrder selectOrder) {
         this.context = context;
         this.orderHistoryModelArrayList = orderHistoryModelArrayList;
         this.selectOrder = selectOrder;
         db = FirebaseFirestore.getInstance();
     }
+    //Creating the view for view holder ***********************************************************************************************
     @NonNull
     @Override
     public OrderHistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.order_history_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //On binding the data to the view
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         OrderHistoryModel orderHistoryModel = orderHistoryModelArrayList.get(position);
         holder.Status.setText(orderHistoryModel.Status);
         holder.BillNo.setText(orderHistoryModel.getDocumentID());
         holder.Date.setText(orderHistoryModel.Time);
-
+        //Getting the shopname *********************************************************************************
         db.collection("Shopkeeper").document(orderHistoryModel.Shopkeeper_ID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -69,7 +71,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        //On selecting the order *************************************************************************
         holder.SelectOrderCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +85,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     public int getItemCount() {
         return orderHistoryModelArrayList.size();
     }
-
+    //Getting the IDs *******************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ShopName, BillNo, Date, Status;
         CardView SelectOrderCard;

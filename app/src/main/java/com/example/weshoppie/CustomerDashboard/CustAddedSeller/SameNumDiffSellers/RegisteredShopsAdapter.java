@@ -19,25 +19,25 @@ public class RegisteredShopsAdapter extends RecyclerView.Adapter<RegisteredShops
     Context context;
     ArrayList<RegisteredShopModel> registeredShopModelArrayList;
     SelectRegisterShop selectRegisterShop;
-
+    //Filtered view for search *******************************************************
     public void setFilteredList(ArrayList<RegisteredShopModel> filteredList){
         this.registeredShopModelArrayList = filteredList;
         notifyDataSetChanged();
     }
-
+    //Constructor **************************************************************************************************************************************
     public RegisteredShopsAdapter(Context context, ArrayList<RegisteredShopModel> registeredShopModelArrayList, SelectRegisterShop selectRegisterShop) {
         this.context = context;
         this.registeredShopModelArrayList = registeredShopModelArrayList;
         this.selectRegisterShop = selectRegisterShop;
     }
-
+    //Creating view to view Holder **********************************************************************************
     @NonNull
     @Override
     public RegisteredShopsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.registered_shops_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //Binding data to the view holder ************************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull RegisteredShopsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         RegisteredShopModel registeredShopModel = registeredShopModelArrayList.get(position);
@@ -55,7 +55,7 @@ public class RegisteredShopsAdapter extends RecyclerView.Adapter<RegisteredShops
     public int getItemCount() {
         return registeredShopModelArrayList.size();
     }
-
+    //Getting IDs ***************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CardView RegisteredShopCard;
         TextView ShopName, ShopType;

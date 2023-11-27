@@ -58,6 +58,7 @@ public class ShopkeeperProfileUpdate extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ShopkeeperProfileUpdate.this, android.R.layout.simple_spinner_item, shop_types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shop_type.setAdapter(adapter);
+        //Setting the adapter to the Spinner *******************************************************************************
         shop_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -87,9 +88,9 @@ public class ShopkeeperProfileUpdate extends AppCompatActivity {
         Shop_Close = findViewById(R.id.Shop_Close_Time_update);
 
         Shopkeeper_Register = findViewById(R.id.Shopkeeper_Register_update);
-
+        //Getting the previous data **************************************************************8
         getData();
-
+        //On setting the opening time **********************************************************************************
         Shop_Open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +109,7 @@ public class ShopkeeperProfileUpdate extends AppCompatActivity {
                 tpd.show();
             }
         });
-
+        //On setting the closing time **********************************************************************************
         Shop_Close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,11 +128,10 @@ public class ShopkeeperProfileUpdate extends AppCompatActivity {
                 tpd.show();
             }
         });
-
+        //On update profile button **************************************************************************************
         Shopkeeper_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //Taking values from the views to local strings *************************************
                 String shopname, shopaddress, shopcity, shoppincode, shopstate, shopopen, shopclose, shoptype, shopdescription, Ownername, Ownerphone;
                 Ownername = Owner_Name.getText().toString();

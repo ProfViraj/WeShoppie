@@ -37,7 +37,7 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order_history);
-
+        //Setting the search View **********************************************************
         searchView = findViewById(R.id.searchViewCustOrderHistory);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -52,7 +52,7 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
                 return false;
             }
         });
-
+        //Setting the recycler view ***************************************************************************888888888
         recyclerView = findViewById(R.id.recyclerOrderHistory);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -81,6 +81,7 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
     }
 
     private void EventChangeListener() {
+        //Realtime updates for the delivered orders ***************************************************************************
         db.collection("Orders").whereEqualTo("Customer_ID", userID)
                 .whereEqualTo("Accepted", true).whereEqualTo("Delivered",true)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -104,7 +105,7 @@ public class CustomerOrderHistory extends AppCompatActivity implements SelectOrd
 
     @Override
     public void onItemSelected(OrderHistoryModel orderHistoryModel) {
-
+        //On order Selected ****************************************************************************
         Intent intent = new Intent(CustomerOrderHistory.this, SeeOrderDetails.class);
         intent.putExtra("BillNo",orderHistoryModel.getDocumentID());
         intent.putExtra("Date",orderHistoryModel.getTime());

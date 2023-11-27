@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#98d6d6"
+    android:padding="30sp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#98d6d6"
+        android:orientation="vertical"
+        android:padding="30sp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:text="Expected Time"
+            android:layout_margin="2sp"
+            android:background="#34d1d1"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dialog_shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click on the clock to enter the expected takeout time"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp" />
+
+        <ImageView
+            android:id="@+id/time_set_up"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:src="@drawable/baseline_access_time_24"/>
+
+        <TextView
+            android:id="@+id/time_show"
+            android:layout_width="150sp"
+            android:layout_height="50sp"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_border"
+            android:layout_marginTop="10sp"/>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginTop="25sp"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -54,6 +54,7 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
         seller_add = findViewById(R.id.seller_add);
         searchView = findViewById(R.id.searchViewCustMySellers);
         searchView.clearFocus();
+        //Initiating SeachView ************************************************************************************
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -66,6 +67,7 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
                 return false;
             }
         });
+        //Add seller Button ******************************************************************************************
         seller_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +75,7 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
                 finish();
             }
         });
-
+        //Setting recycler view ***************************************************************************************
         recyclerView = findViewById(R.id.recyclerSeller);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -86,7 +88,7 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
 
         EventChangeListener();
     }
-
+    //Search view filter *******************************************************************************
     private void filterList(String newText) {
         ArrayList<SellerShow> filteredList = new ArrayList<SellerShow>();
         for (SellerShow show : sellerShowArrayList){
@@ -100,9 +102,10 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
             sellerAdapter.setFilteredList(filteredList);
         }
     }
-
+    //Getting realtime updates of added sellers **************************************************************************88
     private void EventChangeListener() {
-        db.collection("Customer").document(userID).collection("My_Sellers").orderBy("Name", Query.Direction.ASCENDING)
+        db.collection("Customer").document(userID)
+                .collection("My_Sellers").orderBy("Name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -122,9 +125,10 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
                     }
                 });
     }
-
+    //On clicking a particular seller *************************************************************************************
     @Override
     public void onItemClicked(SellerShow sellerShow) {
+        //Initiating the Dialog Box ****************************************************************************************
         Dialog dialog = new Dialog(MySellers.this);
         dialog.setContentView(R.layout.seller_profile_view);
 
@@ -144,7 +148,7 @@ public class MySellers extends AppCompatActivity implements SelectSeller{
         City = dialog.findViewById(R.id.dialog_shop_city);
         Pincode = dialog.findViewById(R.id.dialog_shop_pin);
         Description = dialog.findViewById(R.id.dialog_description);
-
+        //Showing the sellers basic information *****************************************************************************
         db.collection("Shopkeeper").document(sellerShow.getDocumentID()).get().
                 addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override

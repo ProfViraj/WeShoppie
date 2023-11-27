@@ -16,19 +16,19 @@ import java.util.ArrayList;
 public class OrderSeeAdapter extends RecyclerView.Adapter<OrderSeeAdapter.ViewHolder> {
     Context context;
     ArrayList<OrderSeeModel> orderSeeModelArrayList;
-
+    //Constructor *********************************************************************************
     public OrderSeeAdapter(Context context, ArrayList<OrderSeeModel> orderSeeModelArrayList) {
         this.context = context;
         this.orderSeeModelArrayList = orderSeeModelArrayList;
     }
-
+    //Creating the view for view holder **************************************************************************
     @NonNull
     @Override
     public OrderSeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.ordered_product_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //Binding the data to the view ****************************************************************************
     @Override
     public void onBindViewHolder(@NonNull OrderSeeAdapter.ViewHolder holder, int position) {
         OrderSeeModel orderSeeModel = orderSeeModelArrayList.get(position);
@@ -44,7 +44,7 @@ public class OrderSeeAdapter extends RecyclerView.Adapter<OrderSeeAdapter.ViewHo
     public int getItemCount() {
         return orderSeeModelArrayList.size();
     }
-
+    //Getting the IDs *******************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ProductName, ProductPrice, ProductPricePer, Brand, Count, TotalCost;
         public ViewHolder(@NonNull View itemView) {

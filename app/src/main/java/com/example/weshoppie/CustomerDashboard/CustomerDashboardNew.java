@@ -51,7 +51,7 @@ public class CustomerDashboardNew extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_dashboard_new);
-
+        //Initializations *******************************************************************************
         OrderHistory = findViewById(R.id.order_history_text);
         PlaceOrder = findViewById(R.id.place_order_text);
         MySeller = findViewById(R.id.my_seller_text);
@@ -61,7 +61,7 @@ public class CustomerDashboardNew extends AppCompatActivity {
         ProfileView = findViewById(R.id.profile_update);
 
         userid = CurrentUser.getUid();
-
+        //Setting the Current users name *****************************************************************8
         db.collection("Customer").document(userid).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @SuppressLint("SetTextI18n")
@@ -78,43 +78,45 @@ public class CustomerDashboardNew extends AppCompatActivity {
                         Toast.makeText(CustomerDashboardNew.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+        //Profile View Image Click ************************************************************************************
         ProfileView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerDashboardNew.this, CustomerProfileUpdate.class));
             }
         });
+        //Order History *************************************************************************************************8
         OrderHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerDashboardNew.this, CustomerOrderHistory.class));
             }
         });
-
+        //Place order *****************************************************************************************************
         PlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerDashboardNew.this, NewOrUndeliveredOrders.class));
             }
         });
-
+        //View My Sellers **************************************************************************************************
         MySeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerDashboardNew.this, MySellers.class));
             }
         });
-
+        //View Custom Orders **********************************************************************************************
         CustomOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerDashboardNew.this, CustomOrders.class));
             }
         });
-        // to do
+        // Realtime Update Notification if the order is packed *****************************************************************************
         db.collection("Orders").whereEqualTo("Customer_ID", userid)
                 .whereEqualTo("Accepted", true).whereEqualTo("Status","Packed")
-                .whereEqualTo("Delivered", false)
+                .whereEqualTo("Delivered", false).whereEqualTo("Cancellation",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

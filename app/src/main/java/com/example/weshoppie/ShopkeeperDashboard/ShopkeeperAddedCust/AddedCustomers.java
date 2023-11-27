@@ -49,7 +49,7 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_added_customers);
-
+        //Implementing search view ***************************************************************************
         searchView = findViewById(R.id.searchViewCust);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -64,6 +64,7 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
                 return false;
             }
         });
+        //Implementing the recycler view ************************************************************************
         recyclerView = findViewById(R.id.recyclerCustomer);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -92,7 +93,7 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
     }
 
     private void EventChangeListener() {
-
+        //Realtime updates for added customers *********************************************************************
         db.collection("Shopkeeper").document(userID).collection("Added_Customers").orderBy("Name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -116,8 +117,7 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
 
     @Override
     public void onItemClicked(CustShow custShow) {
-
-
+        //On selecting a customer *******************************************************************************
         Dialog dialog = new Dialog(AddedCustomers.this);
         dialog.setContentView(R.layout.customer_profile_view);
 
@@ -128,7 +128,7 @@ public class AddedCustomers extends AppCompatActivity implements SelectCustomer{
         TextView City = dialog.findViewById(R.id.dialog_city);
         TextView Pincode = dialog.findViewById(R.id.dialog_pin);
         ProgressBar Progress = dialog.findViewById((R.id.profileloading));
-
+        //Getting the information of customers ****************************************************************************
         db.collection("Customer").document(custShow.getDocumentID()).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override

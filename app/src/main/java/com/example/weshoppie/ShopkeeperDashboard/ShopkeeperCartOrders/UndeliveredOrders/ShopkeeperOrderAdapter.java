@@ -28,25 +28,26 @@ public class ShopkeeperOrderAdapter extends RecyclerView.Adapter<ShopkeeperOrder
     SeeShopOrders seeShopOrders;
     FirebaseFirestore db;
 
+    //Filtering the list ***********************************************************************************
     public void setFilteredList (ArrayList<ShopkeeperOrderModel> filteredList){
         this.shopkeeperOrderModelArrayList = filteredList;
         notifyDataSetChanged();
     }
-
+    //Constructor *******************************************************************************************
     public ShopkeeperOrderAdapter(Context context, ArrayList<ShopkeeperOrderModel> shopkeeperOrderModelArrayList, SeeShopOrders seeShopOrders) {
         this.context = context;
         this.shopkeeperOrderModelArrayList = shopkeeperOrderModelArrayList;
         this.seeShopOrders = seeShopOrders;
         db = FirebaseFirestore.getInstance();
     }
-
+    //Creating the view for view holder *********************************************************************88
     @NonNull
     @Override
     public ShopkeeperOrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.order_history_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //Binding the data to the view **********************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull ShopkeeperOrderAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ShopkeeperOrderModel shopkeeperOrderModel = shopkeeperOrderModelArrayList.get(position);
@@ -56,7 +57,7 @@ public class ShopkeeperOrderAdapter extends RecyclerView.Adapter<ShopkeeperOrder
 
         holder.CardImage.setVisibility(View.GONE);
         holder.DeliveryDone.setVisibility(View.VISIBLE);
-
+        //Getting customer name *************************************************************************************
         db.collection("Customer").document(shopkeeperOrderModel.Customer_ID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -75,13 +76,14 @@ public class ShopkeeperOrderAdapter extends RecyclerView.Adapter<ShopkeeperOrder
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+        //On selecting order ****************************************************************************************
         holder.SelectOrderCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 seeShopOrders.onOrderSelected(shopkeeperOrderModelArrayList.get(position));
             }
         });
-
+        //On delivery Done ***************************************************************************
         holder.DeliveryDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +96,7 @@ public class ShopkeeperOrderAdapter extends RecyclerView.Adapter<ShopkeeperOrder
     public int getItemCount() {
         return shopkeeperOrderModelArrayList.size();
     }
-
+    //Getting IDs *************************************************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView CustomerName, BillNo, Date, Status;
         CardView SelectOrderCard;

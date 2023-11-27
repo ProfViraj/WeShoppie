@@ -43,22 +43,23 @@ public class SelectUserType extends AppCompatActivity {
         Welcome = findViewById(R.id.WelcomeUser);
         userid = user.getUid();
         usermail = user.getEmail();
-
         Welcome.setText("Login by: "+usermail);
-
+        //Customer Login Button**********************************************************************************************************
         customer_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Checking if the Data exists********************************************************************************************
                 db.collection("Customer").document(userid).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()){
                                     if(task.getResult().exists()){
+                                        //if Exists -> Go to Customer Dashboard******************************************************************
                                         startActivity(new Intent(SelectUserType.this, CustomerDashboardNew.class));
                                     }
                                     else {
+                                        //Does not exist -> Go to Customer Register*****************************************************
                                         Intent intent = new Intent(SelectUserType.this, RegisterCustomer.class);
                                         startActivity(intent);
                                     }
@@ -70,18 +71,21 @@ public class SelectUserType extends AppCompatActivity {
 
             }
         });
-
+        //Shopkeeper Login Button************************************************************************************************
         shopkeeper_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Checking if the Data exists********************************************************************************************
                 db.collection("Shopkeeper").document(userid).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if(task.getResult().exists()){
+                                    //if Exists -> Go to Shopkeeper Dashboard******************************************************************
                                     startActivity(new Intent(SelectUserType.this, ShopkeeperDashboard.class));
                                 }
                                 else {
+                                    //Does not exist -> Go to Shopkeeper Register*****************************************************
                                     Intent intent = new Intent(SelectUserType.this, RegisterShopkeeper.class);
                                     startActivity(intent);
                                 }
@@ -89,7 +93,7 @@ public class SelectUserType extends AppCompatActivity {
                         });
             }
         });
-
+        //Logout button ****************************************************************************************
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

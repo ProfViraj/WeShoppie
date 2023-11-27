@@ -8,14 +8,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.weshoppie.CustomerDashboard.CustAddedSeller.MySellers;
 import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrUndeliveredOrders;
 import com.example.weshoppie.CustomerDashboard.CustPlaceOrder.NewOrderPlace.SeeOrderPlaced.OrderPlaced;
 import com.example.weshoppie.CustomerDashboard.CustomerDashboardNew;
@@ -78,7 +84,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
         Placeorder = findViewById(R.id.place_order);
         CancelOrder = findViewById(R.id.cancel_order);
         searchView = findViewById(R.id.searchViewCustSeeProducts);
-
+        //Implementing search view ***************************************************************
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -92,7 +98,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                 return false;
             }
         });
-
+        //Getting shopkeeper's name ************************************************************************************************8
         db.collection("Shopkeeper").document(ShopId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -108,7 +114,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                         Toast.makeText(SeeProducts.this, "Shop Name not retrieved", Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        //On placing the order ********************************************************************************************************
         Placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,14 +122,70 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                     Toast.makeText(SeeProducts.this, "Select at least one product", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent(SeeProducts.this, OrderPlaced.class);
-                intent.putExtra("BillNo", OrderID);
-                intent.putExtra("ShopId", ShopId);
-                intent.putExtra("Date", time);
-                startActivity(intent);
-                finish();
+
+                Dialog dialog = new Dialog(SeeProducts.this);
+                dialog.setContentView(R.layout.expected_time_dialog);
+                ImageView Clock;
+                TextView TimeShow;
+                Button SubmitTime;
+
+                Clock = dialog.findViewById(R.id.time_set_up);
+                TimeShow = dialog.findViewById(R.id.time_show);
+                SubmitTime = dialog.findViewById(R.id.submit);
+                //Setting the estimated time ***********************************************************************************************
+                Clock.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(SeeProducts.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String am = "AM", pm = "PM";
+                                if (hourOfDay<12){
+                                    TimeShow.setText(String.valueOf(hourOfDay)+" : "+String.valueOf(minute)+" "+am);
+                                }
+                                else {
+                                    TimeShow.setText(String.valueOf(hourOfDay)+" : "+String.valueOf(minute)+" "+pm);
+                                }
+                            }
+                        }, 0, 0, false);
+                        timePickerDialog.show();
+                    }
+                });
+                //Submitting the estimated time ******************************************************************************
+                SubmitTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String Time = TimeShow.getText().toString();
+                        if (TextUtils.isEmpty(Time)){
+                            Toast.makeText(SeeProducts.this, "Set the Expected Time", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        db.collection("Orders").document(OrderID).update("Expected_Time",Time)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(SeeProducts.this, "Time set successfully", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(SeeProducts.this, OrderPlaced.class);
+                                            intent.putExtra("BillNo", OrderID);
+                                            intent.putExtra("ShopId", ShopId);
+                                            intent.putExtra("Date", time);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+                dialog.show();
             }
         });
+        //On cancel the order *******************************************************************************************
         CancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,9 +200,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
         selectProductAdapter = new SelectProductAdapter(SeeProducts.this, arrSelectProducts,this);
 
         recyclerView.setAdapter(selectProductAdapter);
-
-
-
+        //Getting customer's name and number for further use ***********************************************************
         db.collection("Customer").document(UserId).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -156,7 +216,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                         Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        //Realtime updates for products ***************************************************************************
         EventChangeListener();
     }
 
@@ -175,12 +235,13 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
     }
 
     private void DeleteOrder() {
-        db.collection("Orders").document(OrderID).delete()
+        //On cancelling the order ******************************************************************************************************
+        db.collection("Orders").document(OrderID).update("Cancellation", true)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(SeeProducts.this, "Order Deleted Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SeeProducts.this, "Order Cancelled Successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SeeProducts.this, NewOrUndeliveredOrders.class));
                             finish();
                         } else {
@@ -196,6 +257,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
     }
 
     private void EventChangeListener() {
+        //Getting the shopkeepers products ********************************************************************************8
         db.collection("Products").whereEqualTo("Shopkeeper_id",ShopId).
                 addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -222,17 +284,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
     @Override
     public void onQuantitySelected(SelectProductModel selectProductModel) {
         isProductListEmpty = false;
-        /*Map<String,Object> BasicOrderData = new HashMap<>();
-        BasicOrderData.put("Customer_ID",UserId);
-        BasicOrderData.put("Shopkeeper_ID",ShopId);
-        BasicOrderData.put("Customer_Number",Number);
-        BasicOrderData.put("Customer_Name",Name);
-        BasicOrderData.put("Status","Unpacked");
-        BasicOrderData.put("Accepted",false);
-        BasicOrderData.put("Time",time);
-        BasicOrderData.put("Amount","0");
-        BasicOrderData.put("Delivered", false);*/
-
+        //On selecting the products with quantity ************************************************************************
         Map<String,Object> ProductOrderData = new HashMap<>();
         ProductOrderData.put("Product_Name", selectProductModel.Product_Name);
         ProductOrderData.put("Product_Price",selectProductModel.Product_Price);
@@ -248,6 +300,7 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(SeeProducts.this, "ProductAdded", Toast.LENGTH_SHORT).show();
+                        //Updating total count ********************************************************************************
                         db.collection("Orders").document(OrderID).get()
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
@@ -267,96 +320,11 @@ public class SeeProducts extends AppCompatActivity implements SelectCount{
                         Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        /*db.collection("Orders").whereEqualTo("Customer_ID",UserId)
-                .whereEqualTo("Shopkeeper_ID",ShopId)
-                .whereEqualTo("Accepted",false)
-                .whereEqualTo("Status", "Unpacked")
-                .whereEqualTo("Delivered", false)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        final String[] Order = new String[1];
-                        if (task.isSuccessful()){
-                            if (task.getResult().isEmpty()){
-                                db.collection("Orders").add(BasicOrderData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                                        if (task.isSuccessful()){
-                                            Order[0] = task.getResult().getId();
-                                            db.collection("Orders").document(task.getResult().getId()).collection("Added_Products")
-                                                    .document(selectProductModel.documentID).set(ProductOrderData)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()){
-                                                                db.collection("Orders").document(Order[0])
-                                                                        .update("Amount",selectProductModel.getCoststr());
-                                                            } else {
-                                                                Toast.makeText(SeeProducts.this, "FirstDataNotAdded", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                        } else {
-                                            Toast.makeText(SeeProducts.this, "CannotAdd", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                    OrderID = documentSnapshot.getId();
-                                }
-                                db.collection("Orders").document(OrderID).collection("Added_Products")
-                                        .document(selectProductModel.documentID).set(ProductOrderData)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(SeeProducts.this, "ProductAdded", Toast.LENGTH_SHORT).show();
-                                                db.collection("Orders").document(OrderID).get()
-                                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                AmountInt = Integer.parseInt(task.getResult().get("Amount").toString());
-                                                                AmountInt = AmountInt + Integer.parseInt(selectProductModel.getCoststr());
-                                                                AmountStr = String.valueOf(AmountInt);
-
-                                                                db.collection("Orders").document(OrderID)
-                                                                        .update("Amount",AmountStr);
-                                                            }
-                                                        });
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        } else {
-                            Toast.makeText(SeeProducts.this, "DataCannotBeFetch", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SeeProducts.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });*/
     }
 
     @Override
     public void onQuantityNotSelected(SelectProductModel selectProductModel) {
-
+        //Deleting the product from the order ***************************************************************************************
         db.collection("Orders").document(OrderID).collection("Added_Products")
                 .document(selectProductModel.getDocumentID()).delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

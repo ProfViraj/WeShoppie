@@ -19,24 +19,25 @@ public class UnpackedProductAdapter extends RecyclerView.Adapter<UnpackedProduct
     Context context;
     ArrayList<UnpackedProductsModel> unpackedProductsModelArrayList;
     SelectUnpackedProduct selectUnpackedProduct;
+    //Filtering the search list ***********************************************************************
     public void setFilteredList (ArrayList<UnpackedProductsModel> filteredList){
         this.unpackedProductsModelArrayList = filteredList;
         notifyDataSetChanged();
     }
-
+    //Constructor ************************************************************************************************************
     public UnpackedProductAdapter(Context context, ArrayList<UnpackedProductsModel> unpackedProductsModelArrayList, SelectUnpackedProduct selectUnpackedProduct) {
         this.context = context;
         this.unpackedProductsModelArrayList = unpackedProductsModelArrayList;
         this.selectUnpackedProduct = selectUnpackedProduct;
     }
-
+    //Creating the view for view holder ************************************************************************************
     @NonNull
     @Override
     public UnpackedProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.unpacked_product_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //binding the data to the view ******************************************************************************************
     @Override
     public void onBindViewHolder(@NonNull UnpackedProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         UnpackedProductsModel unpackedProductsModel = unpackedProductsModelArrayList.get(position);
@@ -44,6 +45,7 @@ public class UnpackedProductAdapter extends RecyclerView.Adapter<UnpackedProduct
         holder.ProductPrice.setText(unpackedProductsModel.Product_Price);
         holder.ProductCount.setText("Count: "+unpackedProductsModel.getCount());
         holder.ProductTotalCost.setText("Total Cost: "+unpackedProductsModel.getTotal_Cost()+" Rs.");
+        //Editing the product packing status ****************************************************************************
         holder.EditStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +60,7 @@ public class UnpackedProductAdapter extends RecyclerView.Adapter<UnpackedProduct
     public int getItemCount() {
         return unpackedProductsModelArrayList.size();
     }
-
+    //Getting the IDs *******************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ProductName, ProductPrice, ProductCount, ProductTotalCost;
         ImageView EditStatus;

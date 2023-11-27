@@ -22,33 +22,33 @@ public class RecyclerNewProductAdapter extends RecyclerView.Adapter<RecyclerNewP
     ArrayList<NewOrderModel> arrNewOrderModel;
     SelectNewOrder selectNewOrderListener;
     FirebaseFirestore db;
-
+    //Filtering the search list ***************************************************************************************************88
     public void setFilteredList (ArrayList<NewOrderModel> filteredList){
         this.arrNewOrderModel = filteredList;
         notifyDataSetChanged();
     }
-
+    //Constructor ******************************************************************************************************************
     public RecyclerNewProductAdapter(Context context, ArrayList<NewOrderModel> arrNewOrderModel, SelectNewOrder selectNewOrderListener) {
         this.context = context;
         this.arrNewOrderModel = arrNewOrderModel;
         this.selectNewOrderListener = selectNewOrderListener;
         db = FirebaseFirestore.getInstance();
     }
-
+    //Creating the view for viewholder *****************************************************************************************
     @NonNull
     @Override
     public RecyclerNewProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.new_orders_row, parent, false);
         return new ViewHolder(v);
     }
-
+    //Binding the data to the view ******************************************************************************
     @Override
     public void onBindViewHolder(@NonNull RecyclerNewProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         NewOrderModel newOrderModel = arrNewOrderModel.get(position);
         holder.Customer_Name.setText(newOrderModel.Customer_Name);
         holder.Number.setText(newOrderModel.Customer_Number);
         holder.OrderID.setText(newOrderModel.getDocumentID());
-
+        //Selecting the new order *************************************************************************
         holder.NewOrderCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class RecyclerNewProductAdapter extends RecyclerView.Adapter<RecyclerNewP
     public int getItemCount() {
         return arrNewOrderModel.size();
     }
-
+    //Getting the IDs ***************************************************************************************
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView Customer_Name, Number, OrderID;
         CardView NewOrderCard;

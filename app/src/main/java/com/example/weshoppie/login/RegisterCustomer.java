@@ -42,11 +42,11 @@ public class RegisterCustomer extends AppCompatActivity {
         state = findViewById(R.id.state);
         Cust_Name = findViewById(R.id.Cust_Name);
         Cust_Phone = findViewById(R.id.Cust_Phone);
+        Cust_Register = findViewById(R.id.Cust_Register);
 
         userid = CurrentUser.getUid();
         usermail = CurrentUser.getEmail();
-
-        Cust_Register = findViewById(R.id.Cust_Register);
+        //Register the Customer *********************************************************************************************8
         Cust_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +59,7 @@ public class RegisterCustomer extends AppCompatActivity {
                 Cust_city = cust_city.getText().toString();
                 Cust_pincode = pincode.getText().toString();
                 Cust_state = state.getText().toString();
-
+                //Checking if the fields are empty**********************************************************************************
                 if(TextUtils.isEmpty(Cust_name)){
                     Toast.makeText(RegisterCustomer.this, "Enter the Name", Toast.LENGTH_SHORT).show();
                     return;
@@ -88,7 +88,7 @@ public class RegisterCustomer extends AppCompatActivity {
                     Toast.makeText(RegisterCustomer.this, "Enter the State", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //Putting data into the hashmap ***********************************************************
                 Map<String,Object> userdata = new HashMap<>();
                 userdata.put("Name",Cust_name);
                 userdata.put("Mobile_Number",Cust_phone);
@@ -98,7 +98,7 @@ public class RegisterCustomer extends AppCompatActivity {
                 userdata.put("Pincode",Cust_pincode);
                 userdata.put("State",Cust_state);
                 userdata.put("Email",usermail);
-
+                //Adding data to database **************************************************************************************
                 db.collection("Customer").document(userid).set(userdata)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

@@ -2,7 +2,7 @@ package com.example.weshoppie.ShopkeeperDashboard.ShopkeeperCartOrders.Delivered
 
 public class DeliveredOrdersModel {
     String documentID, Status, Time, Customer_ID, Cust_Name;
-
+    //Constructors *************************************************************************************
     public DeliveredOrdersModel() {
     }
 
@@ -11,6 +11,7 @@ public class DeliveredOrdersModel {
         Time = time;
     }
 
+    //Getter and Setter methods ***********************************************************************
     public String getDocumentID() {
         return documentID;
     }

@@ -5,7 +5,7 @@ public class ProductModel {
     String Product_Price_per;
     String Brand;
     String documentID;
-
+    //Constructor *********************************************************************************************
     public ProductModel() {
     }
 
@@ -15,7 +15,7 @@ public class ProductModel {
         Product_Price_per = product_Price_per;
         Brand = brand;
     }
-
+    //Getter and Setter methods *******************************************************************************
     public String getProduct_Name() {
         return Product_Name;
     }

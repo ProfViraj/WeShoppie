@@ -21,14 +21,14 @@ public class DeliveredOrNot extends AppCompatActivity {
 
         Delivered = findViewById(R.id.delivered_orders_button);
         Undelivered = findViewById(R.id.undelivered_orders_button);
-
+        //Delivered orders *************************************************************************************
         Delivered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DeliveredOrNot.this, DeliveredOrders.class));
             }
         });
-
+        //Undelivered Orders ************************************************************************************
         Undelivered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

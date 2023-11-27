@@ -58,7 +58,7 @@ public class SeeEditableOrders extends AppCompatActivity implements SelectOrder 
 
         EventChangeListener();
     }
-
+    //Realtime updates of the editable orders *************************************************************************************
     private void EventChangeListener() {
         db.collection("Orders")
                 .whereEqualTo("Customer_ID", UserID)
@@ -82,7 +82,7 @@ public class SeeEditableOrders extends AppCompatActivity implements SelectOrder 
                     }
                 });
     }
-
+    //On selecting the Order ***********************************************************************************************
     @Override
     public void onItemSelected(OrderHistoryModel orderHistoryModel) {
         db.collection("Orders").document(orderHistoryModel.getDocumentID()).update("Accepted",false);

@@ -61,6 +61,7 @@ public class ProductAddInEdit extends AppCompatActivity implements SelectProduct
 
         recyclerView = findViewById(R.id.recyclerAddNewProduct);
         Confirm = findViewById(R.id.confirm_add_product_in_edit);
+        //Ending adding product activity *************************************************************************************
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +72,7 @@ public class ProductAddInEdit extends AppCompatActivity implements SelectProduct
                 finish();
             }
         });
+        //Implementing the recycler view *************************************************************************************************8
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -83,6 +85,7 @@ public class ProductAddInEdit extends AppCompatActivity implements SelectProduct
     }
 
     private void EventChangeListener() {
+        //Realtime updates for shopkeepers products ***********************************************************************************
         db.collection("Products").whereEqualTo("Shopkeeper_id",ShopId)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -103,12 +106,12 @@ public class ProductAddInEdit extends AppCompatActivity implements SelectProduct
                     }
                 });
     }
-
+    //If the count is zero *************************************************************************************
     @Override
     public void onCountZero(ProductAddInModel productAddInModel) {
         Toast.makeText(this, "Please select the count", Toast.LENGTH_SHORT).show();
     }
-
+    //Adding the product to the database
     @Override
     public void onProductAdd(ProductAddInModel productAddInModel) {
         db.collection("Orders").document(OrderId).collection("Added_Products")
@@ -118,6 +121,7 @@ public class ProductAddInEdit extends AppCompatActivity implements SelectProduct
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             if (task.getResult().isEmpty()){
+                                //Adding the new product ***************************************************************************
                                 AlertDialog.Builder builder = new AlertDialog.Builder(ProductAddInEdit.this)
                                         .setTitle("Add Product")
                                         .setMessage("Do you want to add "+productAddInModel.Product_Name+ "?")
@@ -163,6 +167,7 @@ public class ProductAddInEdit extends AppCompatActivity implements SelectProduct
                                         });
                                 builder.show();
                             } else {
+                                //If product is already added *************************************************************************************
                                 Toast.makeText(ProductAddInEdit.this, "This product is already added... Please update the product", Toast.LENGTH_SHORT).show();
                             }
                         }

@@ -37,13 +37,10 @@ public class Registration extends AppCompatActivity {
 
         Cust_Email = findViewById(R.id.Cust_Email);
         Cust_Set_Password = findViewById(R.id.Cust_Set_Password);
-
         progressbar = findViewById(R.id.progressbar);
-
         Cust_Register = findViewById(R.id.Cust_Register);
-
         click_to_login = findViewById(R.id.click_to_login);
-
+        //Go to Login ************************************************************************
         click_to_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +48,7 @@ public class Registration extends AppCompatActivity {
                 finish();
             }
         });
-
+        //Register Button ************************************************************************************************
         Cust_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +57,7 @@ public class Registration extends AppCompatActivity {
                 String email, password, name, phone;
                 email = Cust_Email.getText().toString();
                 password = Cust_Set_Password.getText().toString();
-
+                //Checking if the fields are empty ********************************************************************************
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(Registration.this, "Enter The Email", Toast.LENGTH_SHORT).show();
                     return;
@@ -69,12 +66,13 @@ public class Registration extends AppCompatActivity {
                     Toast.makeText(Registration.this, "Enter The Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //Creating User ********************************************************************************************************************************
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressbar.setVisibility(View.GONE);
                         if (task.isSuccessful()){
+                            //Sending email for verification *********************************************************************************************
                             Objects.requireNonNull(mAuth.getCurrentUser()).sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
